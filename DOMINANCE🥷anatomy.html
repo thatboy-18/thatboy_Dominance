@@ -1,0 +1,2190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOMINANCE! ANATOMY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d3748;
+            --accent: #4a5568;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --success: #38a169;
+            --error: #e53e3e;
+            --warning: #d69e2e;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --border: #e2e8f0;
+        }
+
+        body.dark-mode {
+            --primary: #00d4ff;
+            --secondary: #00b8cc;
+            --accent: #0099aa;
+            --dark: #0a0e27;
+            --light: #1a1f3a;
+            --success: #00ff88;
+            --error: #ff4444;
+            --warning: #ffaa00;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b8cc;
+            --bg-primary: #0f1629;
+            --bg-secondary: #1a1f3a;
+            --border: #00d4ff33;
+        }
+
+        body.dark-mode::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 184, 204, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-secondary);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .app {
+            min-height: 100vh;
+            padding: 20px;
+            background: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .thatboy-title {
+            font-size: 36px;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .home-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        .italic-bold {
+            font-style: italic;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .btn:hover {
+            background: var(--bg-secondary);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .btn-success:hover {
+            background: #2f855a;
+        }
+
+        .btn-error {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+
+        .card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .quiz-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .quiz-card h3 {
+            flex: 1;
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .question-count {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .quiz-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .quiz-meta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .filter-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-wrapper input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .shortcut-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .mode-selection {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--bg-secondary);
+        }
+
+        .mode-container {
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .mode-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .mode-card {
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 32px 24px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .mode-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .mode-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .mode-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .quiz-take {
+            padding: 24px 0;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .timer-display {
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .question-section {
+            margin: 32px 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .option:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: var(--bg-primary);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: var(--error);
+            background: rgba(255, 68, 68, 0.1);
+        }
+
+        .option-letter {
+            min-width: 32px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 212, 255, 0.15);
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .option.selected .option-letter {
+            background: var(--primary);
+            color: white;
+        }
+
+        .feedback {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .feedback.correct {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .feedback.incorrect {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid rgba(255, 68, 68, 0.3);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 8px solid var(--success);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-primary);
+            margin: 40px auto;
+        }
+
+        .score-percentage {
+            font-size: 60px;
+            font-weight: 900;
+            color: var(--success);
+        }
+
+        .performance-message {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .thatboy-title { font-size: 32px; }
+            .quiz-header { flex-direction: column; }
+        }
+
+        .results-tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 12px 24px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        .review-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .review-card.correct {
+            border-left: 4px solid var(--success);
+        }
+        .review-card.incorrect {
+            border-left: 4px solid var(--error);
+        }
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .review-answer {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .review-your-answer {
+            color: var(--error);
+        }
+        .review-correct-answer {
+            color: var(--success);
+        }
+        .review-explanation {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+        }
+
+        .question-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .question-dot.answered {
+            background: var(--success);
+            color: white;
+        }
+        .question-dot.unanswered {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        .question-dot.current {
+            border: 3px solid var(--primary);
+            transform: scale(1.1);
+        }
+        .question-dot:hover {
+            transform: scale(1.15);
+        }
+
+        @media (max-width: 480px) {
+            .thatboy-title { font-size: 28px; }
+            .review-question { font-size: 14px; }
+            .tab-btn { padding: 8px 16px; font-size: 12px; }
+        }
+        
+        .quiz-history-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--primary);
+        }
+        .history-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+        .history-item:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+        .history-score {
+            font-size: 28px;
+            font-weight: 800;
+            min-width: 80px;
+            text-align: center;
+        }
+        .history-score.high { color: var(--success); }
+        .history-score.medium { color: var(--warning); }
+        .history-score.low { color: var(--error); }
+        .history-details { flex: 1; }
+        .history-date { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
+        .history-topic { font-weight: 600; color: var(--primary); }
+        .history-stats { font-size: 13px; color: var(--text-secondary); }
+        .history-delete-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            padding: 5px 10px;
+        }
+        .history-delete-btn:hover { color: var(--error); transform: scale(1.1); }
+    </style>
+</head>
+<body class="dark-mode">
+<div class="app" id="app">
+
+    <div id="homePage" class="container">
+        <div class="home-header">
+            <h1 class="thatboy-title"><b><i>thatboy</i></b></h1>
+            <p class="subtitle">HUMAN ANATOMY PAST QUESTIONS</p>
+            <div class="tagline">
+                Learn fast. Quiz harder. <span class="italic-bold">Dominate</span>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <button class="btn btn-primary" onclick="startTopicSelection()">🎯 Start Quiz</button>
+            <button class="btn" onclick="toggleSettingsPanel()">⚙️ Settings</button>
+        </div>
+
+        <div class="grid">
+            <div class="card quiz-card">
+                <div class="quiz-card-header">
+                    <h3>Human Anatomy Complete</h3>
+                    <span class="question-count">527 Q's</span>
+                </div>
+                <p class="quiz-description">Full Anatomy question bank • Gross anatomy covered</p>
+                <div class="quiz-meta">
+                    <span>⏱️ Timer optional</span>
+                    <span>📊 527+ Questions</span>
+                    <span>🔬 5 Topics</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <h3 style="margin-bottom: 15px;">🔍 Filter Questions</h3>
+            <div class="filter-group">
+                <label>Question Type</label>
+                <div class="filter-options">
+                    <label class="checkbox-wrapper"><input type="checkbox" id="filterMCQ" checked> MCQ</label>
+                    <label class="checkbox-wrapper"><input type="checkbox" id="filterTrueFalse" checked> True/False</label>
+                    <label class="checkbox-wrapper"><input type="checkbox" id="filterMatching" checked> Matching Questions</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>🔎 Keyword Search</label>
+                <input type="text" id="keywordFilter" class="filter-input" placeholder="e.g., femur, skull, clavicle...">
+            </div>
+            <div class="shortcut-hint">💡 Filters apply when you start a quiz | ⌨️ A/B/C/D/E = answers | N = next | ← = previous</div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 30px; border-top: 2px solid var(--primary); border-radius: 12px;">
+            <p style="font-size: 18px;">Absolute Dominance! <span class="italic-bold">thatboy</span> energy!</p>
+            <p style="font-size: 14px; margin-top: 15px;">🔥 Pro tip: Keyboard shortcuts A/B/C/D/E to answer, N for next, ← for previous</p>
+        </div>
+        
+        <div class="quiz-history-section">
+            <h3 style="margin-bottom: 15px;">📜 Quiz History</h3>
+            <div id="historyList"></div>
+            <div id="historyEmptyState" style="text-align: center; padding: 20px; color: var(--text-secondary);">
+                No quiz history yet. Complete a quiz to see your results!
+            </div>
+            <button class="btn" onclick="clearAllHistory()" style="margin-top: 10px;">🗑️ Clear All History</button>
+        </div>
+    </div>
+
+    <div id="topicPage" class="hidden mode-selection">
+        <div class="mode-container">
+            <h1 class="thatboy-title"><b><i>thatboy</i></b></h1>
+            <h2 style="font-size: 32px; margin-bottom: 20px; color: var(--primary);">Select Topic(s)</h2>
+            <p style="margin-bottom: 20px; color: var(--text-secondary);">✨ Click on topics to select multiple. Selected topics will glow.</p>
+            <div id="topicListContainer" class="mode-cards"></div>
+            <button class="btn btn-success" onclick="proceedToModeSelection()" style="margin-right: 10px; margin-top: 20px;">Continue →</button>
+            <button class="btn btn-error" onclick="goHome()">← Back</button>
+        </div>
+    </div>
+    
+    <div id="modeSelection" class="hidden mode-selection">
+        <div class="mode-container">
+            <h1 class="thatboy-title"><b><i>thatboy</i></b></h1>
+            <h2 style="font-size: 32px; margin-bottom: 20px;">Select Marking Mode</h2>
+            <div class="mode-cards">
+                <div class="mode-card" onclick="confirmStartQuiz('mark-as-you-go')">
+                    <h3>✓ Mark As You Go</h3>
+                    <p>See results after each question</p>
+                </div>
+                <div class="mode-card" onclick="confirmStartQuiz('submit-all')">
+                    <h3>📋 Submit All</h3>
+                    <p>Answer all questions first, then submit</p>
+                </div>
+            </div>
+            <button class="btn" onclick="backToTopic()" style="margin-top: 10px;">← Back to Topics</button>
+        </div>
+    </div>
+    
+    <div id="quizPage" class="hidden quiz-take">
+        <div class="container">
+            <div class="quiz-header">
+                <div>
+                    <h1 style="color: var(--primary); font-size: 24px;" id="quizTitle">Anatomy Quiz</h1>
+                    <p id="modeBadge" style="background: rgba(0,212,255,0.2); display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; margin-top: 8px;">Mode</p>
+                </div>
+                <div class="timer" id="timerDisplay">
+                    <span>⏱️</span>
+                    <span class="timer-display" id="timerText">∞</span>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p style="text-align: center; margin-top: 8px;">Question <strong id="currentQNum">1</strong> of <strong id="totalQNum">0</strong></p>
+
+            <div class="question-section">
+                <div class="question-text" id="questionText"></div>
+                <div class="options-container" id="optionsContainer"></div>
+                <div id="feedbackDiv"></div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; gap: 15px; margin-top: 30px;">
+                <button class="btn" onclick="previousQuestion()" id="prevBtn">← Previous</button>
+                <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">Next →</button>
+                <button class="btn btn-error" onclick="goHome()">Exit</button>
+            </div>
+            
+            <div style="text-align: center; margin: 10px 0;">
+                <button class="btn" onclick="toggleNavigator()" style="padding: 6px 12px; font-size: 12px;">📊 Show Question Navigator</button>
+            </div>
+            <div id="questionNavigator" style="display: none; margin: 20px 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <strong>📋 Question Navigator</strong>
+                    <button class="btn" onclick="toggleNavigator()" style="padding: 4px 8px;">✖ Close</button>
+                </div>
+                <div id="questionGrid" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultsPage" class="hidden">
+        <div class="container" style="text-align: center;">
+            <h1 class="thatboy-title"><b><i>thatboy</i></b></h1>
+            <p class="subtitle">Quiz Complete! 🎉</p>
+
+            <div class="score-circle">
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-label">Your Score</div>
+            </div>
+
+            <div class="performance-message" id="performanceMsg"></div>
+
+            <div class="results-tabs">
+                <button class="tab-btn active" onclick="switchResultsTab('summary')">📊 Summary</button>
+                <button class="tab-btn" onclick="switchResultsTab('review')">📝 Answer Review</button>
+            </div>
+
+            <div id="summaryTab" class="tab-content active">
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-success" onclick="retakeSameMode()">🔄 Retake All</button>
+                    <button class="btn btn-primary" onclick="reviewIncorrect()">🔁 Review Incorrect</button>
+                    <button class="btn btn-error" onclick="goHome()">← Home</button>
+                </div>
+            </div>
+
+            <div id="reviewTab" class="tab-content">
+                <div style="margin-bottom: 20px;">
+                    <button class="btn" onclick="toggleShowOnlyIncorrect()" id="filterIncorrectBtn">🔍 Show Only Incorrect</button>
+                </div>
+                <div id="reviewList" style="max-height: 500px; overflow-y: auto; text-align: left;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="settingsPanel" class="hidden" style="position: fixed; bottom: 20px; right: 20px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; width: 300px; z-index: 1001;">
+        <h4 style="margin-bottom: 16px;">⚙️ Settings</h4>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 12px;">
+                <input type="checkbox" id="timerToggle"> Enable Timer
+            </label>
+            
+            <div id="timerDurationDiv" style="margin-left: 0px;">
+                <label style="font-size: 13px; color: var(--text-secondary); display: block; margin-bottom: 8px;">
+                    ⏱️ Timer Duration: <span id="timerValueDisplay">5 minutes</span>
+                </label>
+                <input type="range" id="timerSlider" min="5" max="180" value="5" step="5" style="width: 100%; margin-bottom: 5px;" disabled>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-secondary);">
+                    <span>5 min</span>
+                    <span>30 min</span>
+                    <span>1 hr</span>
+                    <span>1.5 hr</span>
+                    <span>2 hr</span>
+                    <span>3 hr</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="checkbox" id="shuffleToggle" checked> Shuffle Questions
+            </label>
+        </div>
+        
+        <button class="btn" onclick="toggleSettingsPanel()" style="margin-top: 8px; width: 100%;">Close</button>
+    </div>
+
+<script>
+    function escapeHtml(str) { 
+        const d = document.createElement('div'); 
+        d.textContent = str; 
+        return d.innerHTML; 
+    }
+
+    const masterTopicsList = [
+        "ALL TOPICS",
+        "INTRODUCTION",
+        "OSTEOLOGY",
+        "JOINTS",
+        "CONNECTIVE TISSUE",
+        "EMBRYOLOGY"
+    ];
+
+    // ============================================
+    // COMPLETE ANATOMY QUESTION BANK - 527QUESTIONS
+    // ============================================
+    const masterQuestions = [
+        // INTRODUCTION (15 questions)
+        { id: 1, topic: "INTRODUCTION", type: "mcq", question: "Which of the following structures is the most difficult to observe on an X-Ray film?", options: ["Vertebra T12", "Body of sternum", "Tracheal cartilages", "Manubrium of the sternum", "The second rib"], correctAnswerIndex: 2, explanation: "" },
+        { id: 2, topic: "INTRODUCTION", type: "mcq", question: "A patient had pain in an infected kidney in his lumbar region, a hernia in his inguinal region, haemorrhoids in his perineal region. These regions are the:", options: ["Loin, Groin, between the anus and external genitalia respectively", "Genital region, groin, loin respectively", "Loin, groin and genital region respectively", "Genital region, loin and groin respectively", "Abdomen, loin and genital region respectively"], correctAnswerIndex: 0, explanation: "" },
+        { id: 3, topic: "INTRODUCTION", type: "mcq", question: "A young medical student fell off a motorcycle and broke bones in his coxal, femoral, acromial and crural regions and tore a nerve in his axillary region. These regions are the:", options: ["Armpit, hip, thigh, shoulder and leg respectively", "Thigh, shoulder, leg, armpit and hip respectively", "Hip, thigh, shoulder, leg and armpit respectively", "Leg, armpit, hip, thigh and shoulder respectively", "Hip, thigh, shoulder, leg and armpit respectively"], correctAnswerIndex: 2, explanation: "" },
+        { id: 4, topic: "INTRODUCTION", type: "mcq", question: "Which of the following statements is not correct anatomically?", options: ["The index finger is medial to the pollex", "The carpal bones are arranged into a proximal and distal rows of four bones each", "The Axis is inferior to the Atlas", "The eye brow is superior to the eye lid", "The distal end of the radius lies lateral in a pronated antebrachium"], correctAnswerIndex: 4, explanation: "" },
+        { id: 5, topic: "INTRODUCTION", type: "mcq", question: "In which anatomic region of the abdomen would you expect to locate the gall bladder?", options: ["Epigastric", "Right hypochondrium", "Hypogastrium", "Right iliac fossa", "Left lumbar"], correctAnswerIndex: 1, explanation: "" },
+        { id: 6, topic: "INTRODUCTION", type: "mcq", question: "Barbara is three months pregnant and her gynaecologist wants to measure the head of the foetus to make sure it is developing normally. Newton is behaving abnormally and the doctors strongly suspect he has a tumour in his brain. The medical imaging techniques used in these two cases are:", options: ["Transabdominal ultrasonography and Positron emission tomography respectively", "Positron emission tomography and Transvaginal ultrasonography respectively", "Transabdominal ultrasonography and Magnetic resonance imaging respectively", "Computed tomography and Transabdominal ultrasonography respectively", "Computed tomography and X-rays respectively"], correctAnswerIndex: 2, explanation: "" },
+        { id: 7, topic: "INTRODUCTION", type: "mcq", question: "Body cavities and Membranes:", options: ["The ventral body cavity is subdivided into a cranial cavity and a vertebral cavity", "The thoracic cavity contains two pleural cavities and a thick band of organs called the mediastinum", "The abdominal cavity contains the stomach, urinary bladder, uterus and the prostate gland", "The serous pericardium is associated with the pericardial cavity and the lungs", "Synovial cavities are enclosed within fibrous capsules that fill the sutures of the skull"], correctAnswerIndex: 1, explanation: "" },
+        { id: 8, topic: "INTRODUCTION", type: "mcq", question: "When the trunk of the body is subjected to physical trauma as happens in automobile accidents the most vulnerable organs are those within:", options: ["The pelvic cavity because the walls of the pelvic cavity are formed only by muscles", "The bony abdominal cavity because they have little protection", "The thoracic cavity because they are well protected within the bony rib cage", "The abdominal cavity because the walls of the abdominal cavity are formed only by muscles without bone reinforcement", "All of the above"], correctAnswerIndex: 3, explanation: "" },
+        { id: 9, topic: "INTRODUCTION", type: "mcq", question: "Assume that the body has been sectioned along a median sagittal plane, a frontal plane or a transverse plane made at the level of each of the organs listed below. Which of the following organs would not be visible in all three cases?", options: ["Urinary bladder", "Brain", "Lungs and kidneys", "Heart", "Small intestines"], correctAnswerIndex: 2, explanation: "" },
+        { id: 10, topic: "INTRODUCTION", type: "mcq", question: "Which of the following describes a parasagittal plane?", options: ["A transverse section just above the knees", "Two sections dividing the body into left and right halves", "Any sagittal plane except the median", "Any section dividing the body into anterior and posterior", "C and D"], correctAnswerIndex: 2, explanation: "" },
+        { id: 11, topic: "INTRODUCTION", type: "mcq", question: "Which of the following organs or structures would be found in the left iliac region?", options: ["Appendix", "Stomach", "Liver", "Intestines (sigmoid colon)", "A and B are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 12, topic: "INTRODUCTION", type: "mcq", question: "Place the following structures from the darkest (black) to the lightest (white) as they would appear on an X-ray film: 1. Soft tissue 2. Femur 3. Air in the lungs 4. Gold metal filling in a tooth", options: ["3, 1, 2, 4", "2, 1, 4, 3", "1, 2, 3, 4", "4, 2, 1, 3", "3, 2, 1, 4"], correctAnswerIndex: 0, explanation: "" },
+        { id: 13, topic: "INTRODUCTION", type: "mcq", question: "Which of the following imaging devices would best localize a tumour in a person's brain?", options: ["X-ray", "Digital subtraction angiography", "Positron emission tomography", "Magnetic resonance imaging", "A and B"], correctAnswerIndex: 3, explanation: "" },
+        { id: 14, topic: "INTRODUCTION", type: "mcq", question: "In the anatomical position:", options: ["Arms are extended away from the body", "Palms of the hands face posteriorly", "Body is erect and palms face anterior", "Body is in a foetal position", "The thumb is medial to the little finger"], correctAnswerIndex: 2, explanation: "" },
+        { id: 15, topic: "INTRODUCTION", type: "mcq", question: "If Robert's left kidney was deep to his last two left lower ribs, these ribs will be:", options: ["Superficial", "Lateral", "Ventral", "Downward", "Upward"], correctAnswerIndex: 0, explanation: "" },
+
+        // OSTEOLOGY - SKULL AND FACIAL BONES
+        { id: 16, topic: "OSTEOLOGY", type: "mcq", question: "The mandible:", options: ["Is a U-shaped bone", "It has a horizontal body that forms the inferior jawline", "The superior margin of each ramus bears the coronoid and condylar processes", "A, B and C are correct", "Only A and B are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 17, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following statements about facial bones is FALSE?", options: ["The mandible is the largest and strongest bone of the face", "The maxillae are considered as the keystone bones of the skeleton", "The zygomatic bones are commonly called the cheekbones", "The lacrimal bones contribute to the orbit's medial wall", "The vomer is located in the orbit forming the inferior part of the orbit"], correctAnswerIndex: 4, explanation: "" },
+        { id: 18, topic: "OSTEOLOGY", type: "mcq", question: "The skull:", options: ["The opening that connects the cranial cavity to the spinal column is the foramen magnum", "The bone surrounding the foramen magnum is the occipital bone", "The lambdoid suture separates the two parietal bones from the frontal bone", "A, B and C are correct", "A and B are correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 19, topic: ["OSTEOLOGY", "EMBRYOLOGY"], type: "mcq", question: "The calvaria:", options: ["consists of the occipital, parietal and frontal bones", "consists of the occipital, parietal, maxillary, temporal and frontal bones", "bears fibrous areas known as fontanelles in the infant", "A and C are correct", "A, B and C are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 20, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following bones is not a facial bone?", options: ["Mandible", "Lacrimal", "Hyoid", "Zygomatic", "Maxilla"], correctAnswerIndex: 2, explanation: "" },
+        { id: 21, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following facial bones contains a sinus?", options: ["Mandible", "Maxilla", "Vomer", "Zygomatic", "Lacrimal"], correctAnswerIndex: 1, explanation: "" },
+        { id: 22, topic: "OSTEOLOGY", type: "mcq", question: "The common names for the scapula, clavicle, sternum, calvaria and patella are the:", options: ["Shoulder blade, breast bone, skullcap, hip bone and knee cap respectively", "Shoulder blade, knee cap, collar bone, breast bone and skull cap respectively", "Shoulder blade, collar bone, breast bone, skull cap and knee cap respectively", "Shoulder blade, hip bone, collar bone, knee cap and skull cap respectively", "Shoulder blade, breast bone, skullcap, collar bone and knee cap respectively"], correctAnswerIndex: 2, explanation: "" },
+        { id: 23, topic: "OSTEOLOGY", type: "mcq", question: "The bone in figure 7 is:", options: ["Left clavicle", "Left ilium", "Left scapula", "Right clavicle", "Right scapula"], correctAnswerIndex: 4, explanation: "" },
+        { id: 24, topic: "OSTEOLOGY", type: "mcq", question: "The bone in figure 8 is:", options: ["Foetal mandible", "First rib", "11th rib", "12th rib", "Hyoid"], correctAnswerIndex: 1, explanation: "" },
+        { id: 25, topic: "OSTEOLOGY", type: "mcq", question: "Using figure 10, the letters that represent the maxillary, temporal and zygomatic bones are:", options: ["A, B and C respectively", "E, B and C respectively", "C, D and A respectively", "D, E and A respectively", "E, C and B respectively"], correctAnswerIndex: 4, explanation: "" },
+        { id: 26, topic: "OSTEOLOGY", type: "mcq", question: "Using figure 10, the letter(s) that represents the maxilla is:", options: ["A", "B", "C", "D", "E"], correctAnswerIndex: 4, explanation: "" },
+        { id: 27, topic: "OSTEOLOGY", type: "mcq", question: "The thumb and the great toe are known as:", options: ["Crura and sura", "Genu and hallux", "Pollex and hallux", "Talus and hallux", "Brachium and hallux"], correctAnswerIndex: 2, explanation: "" },
+        { id: 28, topic: ["OSTEOLOGY", "EMBRYOLOGY"], type: "mcq", question: "The anterior fontanelle closes during the second year of life and is then known as the:", options: ["Lambda", "Pterion", "Bregma", "Asterion", "Inion"], correctAnswerIndex: 2, explanation: "" },
+        { id: 29, topic: ["OSTEOLOGY", "EMBRYOLOGY"], type: "mcq", question: "The membranous area between the occipital and parietal bones of the foetal skull is called:", options: ["Lambda", "Bregma", "Lambdoid suture", "Posterior fontanelle", "Squamosal suture"], correctAnswerIndex: 3, explanation: "" },
+        { id: 30, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following makes up the axial skeleton?", options: ["The skull, vertebral column and pelvis", "Arms, legs, hands and feet", "The skull, vertebral column and rib cage", "Shoulder and pelvic girdles", "The skull, shoulder girdles and rib cage"], correctAnswerIndex: 2, explanation: "" },
+        { id: 31, topic: "OSTEOLOGY", type: "mcq", question: "The superior orbital fissure is formed in the sphenoid bone, whereas the inferior orbital fissure is formed between the sphenoid and:", options: ["Maxilla", "Zygomatic", "Ethmoid", "Lacrimal", "Temporal"], correctAnswerIndex: 0, explanation: "" },
+        { id: 32, topic: "OSTEOLOGY", type: "mcq", question: "Paranasal sinuses are found in which of these facial bones?", options: ["Zygomatic", "Nasal Conchae", "Vomer", "Maxillae", "Zygomatic"], correctAnswerIndex: 3, explanation: "" },
+        { id: 33, topic: ["OSTEOLOGY", "EMBRYOLOGY"], type: "mcq", question: "Which of the bones below is the first to ossify in pregnancy?", options: ["Frontal bone", "Clavicle", "Humerus", "Tibia", "Pisiform"], correctAnswerIndex: 1, explanation: "" },
+        { id: 34, topic: "OSTEOLOGY", type: "mcq", question: "A rounded opening in a bone is called:", options: ["Notch", "Fossa", "Foramen", "Crest", "Tubercle"], correctAnswerIndex: 2, explanation: "" },
+        { id: 35, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of the following pairs indicate cranial sutures and the bones between which these sutures are found?", options: ["Coronal - between parietal and frontal", "Sagittal - between the parietal bones", "Squamous - between parietal and temporal", "A, B and C are correct", "A and C are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 36, topic: "OSTEOLOGY", type: "mcq", question: "Which canal and three foramina are found going through the sphenoid bone?", options: ["Optic canal, foramen rotundum, foramen ovale and foramen spinosum", "Optic canal, stylomastoid foramen, foramen ovale and foramen spinosum", "Optic canal, foramen rotundum, jugular foramen and foramen spinosum", "Optic canal, foramen rotundum, foramen ovale and foramen magnum", "Optic canal, stylomastoid foramen, jugular foramen and foramen magnum"], correctAnswerIndex: 0, explanation: "" },
+        { id: 37, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following are associated with the temporal bone?", options: ["Squamous suture, zygomatic process, mandibular fossa and stylomastoid foramen", "External acoustic meatus, styloid process, jugular foramen and carotid canal", "Optic canal, foramen rotundum, hypoglossal canal and foramen ovale", "A, B and C are correct", "A and B are correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 38, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following are associated with the ethmoid bone?", options: ["Crista galli, cribriform plates, perpendicular plate and superior nasal conchae", "Styloid process, inferior nasal conchae, jugular foramen and carotid canal", "Optic canal, foramen rotundum, hypoglossal canal and foramen ovale", "A, B and C are correct", "A and B are correct"], correctAnswerIndex: 0, explanation: "" },
+        { id: 39, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following are associated with the frontal bone?", options: ["Supraorbital foramen, glabella, floor of anterior cranial fossa and superior part of the orbit", "Optic canal, foramen rotundum, foramen ovale and foramen spinosum", "Optic canal, stylomastoid foramen, foramen ovale and foramen spinosum", "A, B and C are correct", "A and B are correct"], correctAnswerIndex: 0, explanation: "" },
+        { id: 40, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following facial bones is/are part of the hard palate?", options: ["Mandible", "Maxilla", "Vomer", "Zygomatic", "A and C are correct"], correctAnswerIndex: 1, explanation: "" },
+        { id: 41, topic: "OSTEOLOGY", type: "mcq", question: "Which nasal concha(e) is a facial bone?", options: ["Superior", "Middle", "Inferior", "They are all facial bones", "Superior and middle"], correctAnswerIndex: 2, explanation: "" },
+        { id: 42, topic: "OSTEOLOGY", type: "mcq", question: "How many bones are in the adult human skull (including the mandible)?", options: ["22", "20", "24", "25", "32"], correctAnswerIndex: 0, explanation: "" },
+        { id: 43, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following bones is not an integral bone of the skull and is not attached by sutures to the remainder of the skull bones?", options: ["Sphenoid", "Ethmoid", "Maxilla", "Mandible", "Vomer"], correctAnswerIndex: 3, explanation: "" },
+        { id: 44, topic: "OSTEOLOGY", type: "mcq", question: "The skull bone that is connected to the rest of the cranium posteriorly via the coronal suture is the:", options: ["Parietal", "Frontal", "Occipital", "Sphenoid", "Maxilla"], correctAnswerIndex: 1, explanation: "" },
+        { id: 45, topic: "OSTEOLOGY", type: "mcq", question: "The skull bone that provides the major passageway for the brain to communicate with the rest of the body is the:", options: ["Occipital", "Parietal", "Frontal", "Ethmoid", "Temporal"], correctAnswerIndex: 0, explanation: "" },
+        { id: 46, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following structures serves as a 'seat' of the endocrine system by supporting the pituitary gland?", options: ["Pterygoid process", "Greater wings of the sphenoid bone", "Lesser wings of the sphenoid bone", "Sella turcica", "Palatine process of maxilla"], correctAnswerIndex: 3, explanation: "" },
+        { id: 47, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following bones does not articulate directly with any other bone in the skeleton?", options: ["Mandible", "Clavicle", "Scapula", "Hyoid", "Fibula"], correctAnswerIndex: 3, explanation: "" },
+        { id: 48, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following is true about the paranasal sinuses?", options: ["Paranasal sinuses open into the oral cavity", "Paranasal sinuses enhance the resonance of the voice and lighten the skull", "Paranasal sinuses contain passages acting as one-way valves", "Paranasal sinuses are found in maxillary, ethmoid, and lacrimal bones", "Paranasal sinuses are found in maxillary, frontal and lacrimal bones"], correctAnswerIndex: 1, explanation: "" },
+        { id: 49, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following is not a cranial bone?", options: ["Sphenoid", "Ethmoid", "Parietal", "Maxilla", "Temporal"], correctAnswerIndex: 3, explanation: "" },
+        { id: 50, topic: "OSTEOLOGY", type: "mcq", question: "Evaluate the following statements about the mandibular and the mental foramina of the mandible:", options: ["The mandibular foramen is on the medial surface of the ramus", "The mandibular foramen is on the lateral surface of the ramus and is for injecting anaesthetic", "The mental foramen is on the anterior part of the mandibular body", "The mental foramen is on the anterolateral side of the mandibular body and is for blood vessels and nerves to the lower lip", "A and D are correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 51, topic: "OSTEOLOGY", type: "mcq", question: "The maxillae:", options: ["Form the upper jaw and the central part of the facial skeleton", "Articulate with all facial bones", "Do not articulate with the mandible", "Form the bony roof of the oral cavity/mouth", "A, C and D are correct"], correctAnswerIndex: 4, explanation: "" },
+
+        // OSTEOLOGY - VERTEBRAL COLUMN AND RIBS
+        { id: 52, topic: "OSTEOLOGY", type: "mcq", question: "The following are characteristics of the vertebral column EXCEPT:", options: ["It has a chain of 33 individual vertebrae with 23 intervertebral discs of fibrocartilage", "About 1/4 of the length is contributed by the 23 intervertebral discs of fibrocartilage", "Only the thoracic and sacral curvatures are well developed at birth and are termed as primary curvatures", "The sacral curvature positions the weight of the upper part of the body over the lower limbs, providing optimal balance during standing", "In the adult there are 29 vertebrae; 27 mobile, 2 immobile, and 20 intervertebral discs"], correctAnswerIndex: 4, explanation: "" },
+        { id: 53, topic: "OSTEOLOGY", type: "mcq", question: "A 40-year old man has lordosis. This is:", options: ["An exaggerated inward curvature of the lumbar region of the spine just above the sacrum", "An abnormal lateral curvature of the vertebral column and is common in obese men and Pregnant women", "An exaggerated thoracic curvature", "Also known as 'twisted disease'", "Is also known as 'hunchback'"], correctAnswerIndex: 0, explanation: "" },
+        { id: 54, topic: "OSTEOLOGY", type: "mcq", question: "A 14-year old girl has Scoliosis. This is:", options: ["An exaggerated inward curvature of the lumbar region of the spine just above the sacrum", "An abnormal lateral curvature of the vertebral column", "An exaggerated thoracic curvature", "Also known as 'bent-backward disease'", "Also known as hunchback"], correctAnswerIndex: 1, explanation: "" },
+        { id: 55, topic: "OSTEOLOGY", type: "mcq", question: "The vertebra which has no body is the:", options: ["Atlas", "Axis", "Vertebra prominens", "Sacrum", "Lumbar"], correctAnswerIndex: 0, explanation: "" },
+        { id: 56, topic: "OSTEOLOGY", type: "mcq", question: "How many pairs of false ribs are present in the skeleton?", options: ["2", "5", "7", "12", "4"], correctAnswerIndex: 1, explanation: "" },
+        { id: 57, topic: "OSTEOLOGY", type: "mcq", question: "The superior portion of the sternum is the:", options: ["Body", "Glenoid fossa", "Manubrium", "Xiphoid process", "Coronoid fossa"], correctAnswerIndex: 2, explanation: "" },
+        { id: 58, topic: "OSTEOLOGY", type: "mcq", question: "If you see a foramen in the transverse process of a vertebra, which type of vertebra are you observing?", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccyx"], correctAnswerIndex: 0, explanation: "" },
+        { id: 59, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following abnormal curve(s) is often seen in obese men with 'potbellies' as they attempt to preserve their center of gravity?", options: ["Kyphosis", "Hunchback", "Scoliosis", "Lordosis", "Twisted disease"], correctAnswerIndex: 3, explanation: "" },
+        { id: 60, topic: "OSTEOLOGY", type: "mcq", question: "The foramen magnum is a large hole in the base of the occipital bone that transmits the spinal cord. The homologous structure in an individual vertebra is the:", options: ["foramen rotundum", "intervertebral foramen", "transverse foramen", "vertebral foramen", "nutrient foramen"], correctAnswerIndex: 3, explanation: "" },
+        { id: 61, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following ribs is a true rib?", options: ["11", "12", "7", "8", "10"], correctAnswerIndex: 2, explanation: "" },
+        { id: 62, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following statements about the sacrum is false?", options: ["Is located on the posterior aspect of the pelvis", "Is curved and triangular", "Articulates with L5 superiorly and the coccyx inferiorly", "Its alae articulate with the two hip bones", "Consists of six sacral vertebrae and four anterior foramina"], correctAnswerIndex: 4, explanation: "" },
+        { id: 63, topic: "OSTEOLOGY", type: "mcq", question: "How many cervical vertebrae are typically present in the body?", options: ["3", "5", "7", "10", "12"], correctAnswerIndex: 2, explanation: "" },
+        { id: 64, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Demifacets are a characteristic of which type of vertebrae?", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccyx"], correctAnswerIndex: 1, explanation: "" },
+        { id: 65, topic: "OSTEOLOGY", type: "mcq", question: "How many bones make up the adult vertebral column?", options: ["5", "26", "25", "62", "24"], correctAnswerIndex: 1, explanation: "" },
+        { id: 66, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following phrases best describes the function of the vertebral curves?", options: ["To provide resilience and flexibility", "To accommodate muscle attachment", "To improve cervical center of gravity", "To accommodate the weight of the pelvic girdle", "To accommodate the viscera"], correctAnswerIndex: 0, explanation: "" },
+        { id: 67, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The primary functions of the vertebral column include:", options: ["Conducting nervous impulses from the brain", "Protection of the spinal cord", "Transmission of weight from the trunk to the lower limbs", "Both B and C", "Both A and D"], correctAnswerIndex: 3, explanation: "" },
+        { id: 68, topic: "OSTEOLOGY", type: "mcq", question: "Cervical vertebrae can be uniquely identified by the presence of:", options: ["Transverse foramina", "Transverse processes", "Spinous processes", "Vertebral foramina", "Heavy bodies"], correctAnswerIndex: 0, explanation: "" },
+        { id: 69, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The only group of vertebrae that articulates with the ribs is:", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Lumbar and sacral"], correctAnswerIndex: 1, explanation: "" },
+        { id: 70, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The major function(s) of the thoracic cage is (are):", options: ["To protect the lungs", "To help expand the thoracic cavity during breathing", "To aid in digestion", "Both A and B", "All of the above"], correctAnswerIndex: 3, explanation: "" },
+        { id: 71, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The sternum:", options: ["Is also known as the 'breastbone' and its xiphoid process is a plate of hyaline cartilage until about age 40", "Is a bony plate anterior to the heart", "Is an irregular bone that is divided into 3 regions: manubrium, body and xiphoid process", "A, B and C are correct", "A and C are correct"], correctAnswerIndex: 3, explanation: "" },
+
+        // OSTEOLOGY - UPPER LIMB BONES
+        { id: 72, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of the following is associated with the PROXIMAL END of the humerus?", options: ["Greater trochanter, lesser tubercle and intertrochanteric crest", "Greater tubercle, Lesser tubercle and intertubercular groove", "Lesser trochanter, greater trochanter and bicipital groove", "Greater tuberosity, lesser tuberosity and intertrochanteric crest", "Coronoid fossa, radial fossa and olecranon fossa"], correctAnswerIndex: 1, explanation: "" },
+        { id: 73, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of the following is associated with the DISTAL END of the humerus?", options: ["Greater trochanter, lesser tubercle and intertrochanteric crest", "Greater tubercle, Lesser tubercle and intertubercular groove", "Lesser trochanter, greater trochanter and bicipital groove", "Greater tuberosity, lesser tuberosity and intertrochanteric crest", "Coronoid fossa, radial fossa and olecranon fossa"], correctAnswerIndex: 4, explanation: "" },
+        { id: 74, topic: "OSTEOLOGY", type: "mcq", question: "The side to which an ulna belongs can be determined from the following:", options: ["The head is proximal", "The styloid process is proximal and lateral to the olecranon process", "The olecranon process and coronoid process are located at the proximal end", "On the lateral side of the olecranon process is the radial notch", "The head and the styloid process are separated by a deep concavity known as the trochlear notch"], correctAnswerIndex: 2, explanation: "" },
+        { id: 75, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The pectoral girdle is composed of the:", options: ["Scapula and humerus", "Clavicle and scapula", "Clavicle, scapula and humerus", "Humerus and clavicle", "Scapula, humerus radius"], correctAnswerIndex: 1, explanation: "" },
+        { id: 76, topic: "OSTEOLOGY", type: "mcq", question: "Which digit does not have a middle phalanx?", options: ["I (thumb)", "II (index finger)", "IV (ring finger)", "V (little finger)", "III (middle finger)"], correctAnswerIndex: 0, explanation: "" },
+        { id: 77, topic: "OSTEOLOGY", type: "mcq", question: "Children are often told to keep this process off the table while eating:", options: ["Acromion", "Coronoid", "Olecranon", "Trochlea", "Styloid process"], correctAnswerIndex: 2, explanation: "" },
+        { id: 78, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "On which bone is the head found at the distal end?", options: ["Radius", "Ulna", "Humerus", "Scapula", "Clavicle"], correctAnswerIndex: 1, explanation: "" },
+        { id: 79, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The rotator cuff muscles surround and provide muscular support to the glenohumeral joint. One of the rotator cuff muscles is called the supraspinatus muscle. The origin of this muscle in figure 1 is:", options: ["A", "B", "C", "D", "E"], correctAnswerIndex: 0, explanation: "" },
+        { id: 80, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The joints indicated by the big arrows in figure 2 are:", options: ["Acromioclavicular and sternoclavicular", "Costosternal and sternoclavicular", "Glenohumeral and sternoclavicular", "Scapulothoracic and sternoclavicular", "Sternoclavicular and Glenohumeral"], correctAnswerIndex: 0, explanation: "" },
+        { id: 81, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The triceps brachii muscle is the principle elbow extensor. It originates on the scapula and inserts on the olecranon process of the ulna. Using figure 3, the insertion of the triceps muscle is:", options: ["A", "B", "C", "D", "E"], correctAnswerIndex: 4, explanation: "" },
+        { id: 82, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following carpal bones are shown in figure 13? i. Scaphoid and lunate ii. Triquetrum and pisiform iii. Trapezium and trapezoid iv. Capitate and hamate v. Hamate and pisiform", options: ["i and ii only", "i, ii, and iii only", "i, iii and iv only", "i, ii, iii and iv only", "ii, iii, iv, and v only"], correctAnswerIndex: 2, explanation: "" },
+        { id: 83, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "On which bone is the head found at the distal end?", options: ["Radius", "Ulna", "Humerus", "Scapula", "None"], correctAnswerIndex: 1, explanation: "" },
+        { id: 84, topic: "OSTEOLOGY", type: "mcq", question: "The proximal row of carpal bones includes which of the following?", options: ["Triquetrum, pisiform, scaphoid and lunate", "Scaphoid, lunate, triquetrum and pisiform", "Scaphoid, lunate, triquetrum and hamate", "Trapezoid, scaphoid, lunate and triquetrum", "Pisiform, triquetrum, lunate and capitate"], correctAnswerIndex: 1, explanation: "" },
+        { id: 85, topic: "OSTEOLOGY", type: "mcq", question: "The antebrachium is composed of which of the following two bones?", options: ["The radius and the ulna", "The humerus and the clavicle", "The scapula and the clavicle", "The humerus and the radius", "Humerus and scapula"], correctAnswerIndex: 0, explanation: "" },
+        { id: 86, topic: "OSTEOLOGY", type: "mcq", question: "The 'true wrist' or carpus consists of:", options: ["A group of eight short bones united by ligaments", "Carpals, metacarpals and the phalanges", "The styloid processes of the radius and ulna", "A group of eight short bones and the metacarpals", "The metacarpals and carpals"], correctAnswerIndex: 0, explanation: "" },
+        { id: 87, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which two carpals articulate with the radius to form the wrist joint?", options: ["Triquetrum and lunate", "Scaphoid and pisiform", "Scaphoid and lunate", "Trapezoid and hamate", "Capitate and hamate"], correctAnswerIndex: 2, explanation: "" },
+        { id: 88, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of these bones would bear a ring?", options: ["Phalanx", "Metacarpal", "Carpal", "Tarsal", "Metatarsal"], correctAnswerIndex: 0, explanation: "" },
+        { id: 89, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The side to which a scapula belongs can be determined from the following:", options: ["The large concave surface is posterior", "The spine projects from the posterior surface and extends laterally as the acromion", "The acromion and glenoid cavity belong to the lower and lateral part of the scapula", "Supraspinous and infraspinous fossae are located on the anterior surface", "Coracoid process is located on the posterior surface"], correctAnswerIndex: 1, explanation: "" },
+        { id: 90, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The following are features of the humerus EXCEPT:", options: ["It articulates with the scapula at the shoulder", "It consists of a shaft and two ends", "The proximal end consists of the condyle, the medial epicondyle and the lateral epicondyle", "The proximal end consists of the head, anatomical neck, and two tubercles", "The distal end consists of the two condyles, a medial trochlea and a lateral capitulum"], correctAnswerIndex: 2, explanation: "" },
+        { id: 91, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Evaluate the following statements concerning the radius:", options: ["It is the longer and more lateral bone of the forearm", "It articulates with the carpus proximally and the ulna medially", "The proximal end consists of a head, neck and tuberosity", "The distal end is expanded and bears a pointed process known as the styloid process", "C and D are correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 92, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Characteristics of the ulna include:", options: ["The ulna is the longer and more lateral bone of the forearm", "It articulates with the humerus proximally and the radius laterally", "The proximal end includes the olecranon, the trochlear notch and the radial notch", "The distal end includes the head and the styloid process", "B, C and D are correct"], correctAnswerIndex: 4, explanation: "" },
+
+        // OSTEOLOGY - LOWER LIMB BONES
+        { id: 93, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of the following is associated with the DISTAL END of the femur?", options: ["Lateral condyle, medial condyle and adductor tubercle", "Intercondylar notch and patellar surface", "Gluteal tuberosity and intertrochanteric crest", "A, B and C are correct", "A and B are correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 94, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of the following is associated with the PROXIMAL END of the femur?", options: ["Lateral condyle, medial condyle and adductor tubercle", "Intercondylar notch and patellar surface", "Gluteal tuberosity and intertrochanteric crest", "A, B and C are correct", "A and B are correct"], correctAnswerIndex: 2, explanation: "" },
+        { id: 95, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of the following is associated with the DISTAL END of the tibia?", options: ["Fibular notch and medial malleolus", "Medial condyle, lateral condyle and tibial tuberosity", "Intercondylar eminence and tibial tuberosity", "Intercondylar eminence, fibular notch and tibial tuberosity", "Fibular notch and lateral malleolus"], correctAnswerIndex: 0, explanation: "" },
+        { id: 96, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of the following is associated with the PROXIMAL END of the tibia?", options: ["Intercondylar eminence, fibular notch and tibial tuberosity", "Medial condyle, lateral condyle and tibial tuberosity", "Intercondylar eminence and tibial tuberosity", "A, B and C are correct", "A and C are correct"], correctAnswerIndex: 2, explanation: "" },
+        { id: 97, topic: "OSTEOLOGY", type: "mcq", question: "Which bone is not part of the pelvic girdle?", options: ["Ilium", "Ischium", "Pubis", "Sacrum", "Pubic tubercle"], correctAnswerIndex: 3, explanation: "" },
+        { id: 98, topic: "OSTEOLOGY", type: "mcq", question: "The heel bone is called the:", options: ["Tarsus", "Talus", "Calcaneus", "Hallux", "Navicular"], correctAnswerIndex: 2, explanation: "" },
+        { id: 99, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The prominent bony knobs on each side of the ankle joint are:", options: ["The styloid processes of the tibia and fibula", "The medial malleolus of the fibula and the lateral malleolus of the tibia", "The medial malleolus of the tibia and the lateral malleolus of the fibula", "The epicondyles of the tibia and fibula", "The head of the fibula and the tuberosity of the tibia"], correctAnswerIndex: 2, explanation: "" },
+        { id: 100, topic: "OSTEOLOGY", type: "mcq", question: "The hyoid bone is unique because it is:", options: ["A sesamoid bone formed in connective tissue under pressure", "Attached to the sternal angle at the T4 vertebral level", "Covered with mucosa and epithelial tissue", "Shaped like a right-angled triangle on its side", "The only bone that does not articulate with any other bone"], correctAnswerIndex: 4, explanation: "" },
+        { id: 101, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following tarsal bones are shown in figure 11? i. Calcaneus and talus ii. Navicular and medial cuneiform iii. Cuboid and lateral cuneiform iv. Navicular and intermediate cuneiform v. Cuboid and intermediate cuneiform", options: ["i, ii and v only", "i, ii, and iii only", "iii, iv, and v only", "i, ii, and iv only", "ii, iv, and v only"], correctAnswerIndex: 1, explanation: "" },
+        { id: 102, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following tarsal bones are shown in figure 12? i. Calcaneus and talus ii. Navicular and medial cuneiform iii. Cuboid and lateral cuneiform iv. Navicular and intermediate cuneiform v. Cuboid and intermediate cuneiform", options: ["i and ii only", "i, ii, and iii only", "i, iii, iv, and v only", "i, ii, iii and iv only", "ii, iii, iv, and v only"], correctAnswerIndex: 3, explanation: "" },
+        { id: 103, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The prominent bump on the lateral aspect of the leg at the ankle joint is the:", options: ["Tibial tuberosity", "Head of the fibula", "Lateral condyle of the femur", "A lateral extension of the tibia", "Medial malleolus"], correctAnswerIndex: 1, explanation: "" },
+        { id: 104, topic: "OSTEOLOGY", type: "mcq", question: "Which one of these bones is not found in the pelvis?", options: ["Ischium", "Ilium", "Sacrum", "Pubis", "Hyoid"], correctAnswerIndex: 4, explanation: "" },
+        { id: 105, topic: "OSTEOLOGY", type: "mcq", question: "The lesser trochanter, intertrochanteric crest and gluteal tuberosity are found on the:", options: ["Os coxa", "Femur", "Tibia", "Fibula", "Humerus"], correctAnswerIndex: 1, explanation: "" },
+        { id: 106, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which tarsal bone is the keystone of the medial longitudinal arch?", options: ["Talus", "Calcaneus", "Cuboid", "Navicular", "Lateral cuneiform"], correctAnswerIndex: 3, explanation: "" },
+        { id: 107, topic: "OSTEOLOGY", type: "mcq", question: "Which of the following bones is/are not weight bearing?", options: ["Femur", "Tibia", "Fibula", "Talus", "Femur and tibia"], correctAnswerIndex: 2, explanation: "" },
+        { id: 108, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which portion of the fibula articulates with the talus?", options: ["Shaft", "Head", "Medial malleolus", "Lateral malleolus", "Lateral malleolus and head"], correctAnswerIndex: 3, explanation: "" },
+        { id: 109, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of the following bones is capable of bearing the greatest physical stress?", options: ["Femur", "Ischium", "Fibula", "Patella", "Ulna"], correctAnswerIndex: 0, explanation: "" },
+        { id: 110, topic: "OSTEOLOGY", type: "mcq", question: "The bone(s) of the leg which bears no weight is/are:", options: ["Femur", "Tibia", "Fibula", "Talus", "Fibula and Talus"], correctAnswerIndex: 2, explanation: "" },
+        { id: 111, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The femur:", options: ["Is the longest and heaviest bone of the body", "In the standing position the femur transmits weight from the hip bone to the tibia", "The upper end consists of a head, a neck, greater tubercle and a lesser tubercle", "The lower end consists of two condyles and two trochanters", "A and B are correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 112, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The bony pelvis:", options: ["Consists of the two hip bones, sacrum and coccyx", "In the female it is generally wider, shallower and lighter and adapted for childbearing", "Has a pelvic inlet and pelvic outlet", "The outlet is bounded anteriorly by the pubic arch, laterally by the ischial tuberosities, posteriorly by the sacrum and coccyx", "All the above are features of the bony pelvis"], correctAnswerIndex: 4, explanation: "" },
+        { id: 113, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The patella:", options: ["Is a sesamoid bone that articulates with the femur, tibia and fibula", "Protects the knee joint anteriorly", "Is enclosed in the tendon that secures the anterior muscles of the thigh to the tibia", "Has an apex that is directed superiorly and a base that is inferior", "Is a short bone"], correctAnswerIndex: 1, explanation: "" },
+        { id: 114, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The foot:", options: ["Consists of the tarsals, metacarpals and phalanges", "Consists of tarsal bones only", "Has 2 arches; medial longitudinal arch and lateral longitudinal arch", "It has 7 tarsal bones, 5 metatarsal bones and 14 phalanges", "It has 3 cuneiforms; superior, inferior and intermediate cuneiforms"], correctAnswerIndex: 3, explanation: "" },
+        { id: 115, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The fibula:", options: ["Is a thin bone with two expanded ends", "Its malleolus forms the medial bulge of the ankle and articulates with the talus bone of the foot", "Several muscles originate from the fibula but it does not bear weight", "A, B, C are correct", "A and C are correct"], correctAnswerIndex: 2, explanation: "" },
+        { id: 116, topic: "OSTEOLOGY", type: "mcq", question: "Sexual differences in the human skeleton:", options: ["The mandible is larger and more robust in the female", "Male bones are heavier with prominent bone markings", "The male pelvis is broader with a heart-shaped inlet and relatively deeper than the female pelvis", "The sacrum is a long narrow triangle with a less pronounced sacral curvature in the female", "The female cranium is about 10% larger on the average"], correctAnswerIndex: 1, explanation: "" },
+
+        // BONE CLASSIFICATION (Matching style)
+        { id: 117, topic: "OSTEOLOGY", type: "matching", question: "Humerus", options: ["Flat", "Short", "Long", "Irregular bone", "None of the above"], correctAnswerIndex: 2, explanation: "" },
+        { id: 118, topic: "OSTEOLOGY", type: "matching", question: "Vertebrae", options: ["Flat", "Short", "Long", "Irregular bone", "None of the above"], correctAnswerIndex: 3, explanation: "" },
+        { id: 119, topic: "OSTEOLOGY", type: "matching", question: "Clavicle", options: ["Flat", "Short", "Long", "Irregular bone", "None of the above"], correctAnswerIndex: 2, explanation: "" },
+        { id: 120, topic: "OSTEOLOGY", type: "matching", question: "Scapula", options: ["Flat", "Short", "Long", "Irregular bone", "None of the above"], correctAnswerIndex: 0, explanation: "" },
+        { id: 121, topic: "OSTEOLOGY", type: "matching", question: "Scaphoid", options: ["Flat", "Short", "Long", "Irregular bone", "None of the above"], correctAnswerIndex: 1, explanation: "" },
+
+        // APPENDICULAR/AXIAL SKELETON
+        { id: 122, topic: "OSTEOLOGY", type: "matching", question: "Hyoid", options: ["Appendicular skeleton", "Axial skeleton", "None of the above", "", ""], correctAnswerIndex: 1, explanation: "" },
+        { id: 123, topic: "OSTEOLOGY", type: "matching", question: "Axis", options: ["Appendicular skeleton", "Axial skeleton", "None of the above", "", ""], correctAnswerIndex: 1, explanation: "" },
+        { id: 124, topic: "OSTEOLOGY", type: "matching", question: "Humerus", options: ["Appendicular skeleton", "Axial skeleton", "None of the above", "", ""], correctAnswerIndex: 0, explanation: "" },
+        { id: 125, topic: "OSTEOLOGY", type: "matching", question: "Tibia", options: ["Appendicular skeleton", "Axial skeleton", "None of the above", "", ""], correctAnswerIndex: 0, explanation: "" },
+        { id: 126, topic: "OSTEOLOGY", type: "matching", question: "Scapula", options: ["Appendicular skeleton", "Axial skeleton", "None of the above", "", ""], correctAnswerIndex: 0, explanation: "" },
+
+        // BONE MARKINGS MATCHING (Large matching set)
+        { id: 127, topic: "OSTEOLOGY", type: "matching", question: "Shallow depression", options: ["Fossa", "Process", "Sinus", "Trochanter", "Epicondyle"], correctAnswerIndex: 0, explanation: "" },
+        { id: 128, topic: "OSTEOLOGY", type: "matching", question: "Air-filled cavity", options: ["Fossa", "Process", "Sinus", "Trochanter", "Epicondyle"], correctAnswerIndex: 2, explanation: "" },
+        { id: 129, topic: "OSTEOLOGY", type: "matching", question: "Large, irregularly shaped projection", options: ["Fossa", "Process", "Sinus", "Trochanter", "Epicondyle"], correctAnswerIndex: 3, explanation: "" },
+        { id: 130, topic: "OSTEOLOGY", type: "matching", question: "Raised area on or above a condyle", options: ["Fossa", "Process", "Sinus", "Trochanter", "Epicondyle"], correctAnswerIndex: 4, explanation: "" },
+        { id: 131, topic: "OSTEOLOGY", type: "matching", question: "Projection or prominence", options: ["Fossa", "Process", "Sinus", "Trochanter", "Epicondyle"], correctAnswerIndex: 1, explanation: "" },
+        { id: 132, topic: "OSTEOLOGY", type: "matching", question: "Scapular region to which the clavicle connects", options: ["Acromion", "Deltoid tuberosity", "Clavicle", "Humerus", "Radius"], correctAnswerIndex: 0, explanation: "" },
+        { id: 133, topic: "OSTEOLOGY", type: "matching", question: "Forearm bones", options: ["Acromion", "Deltoid tuberosity", "Clavicle", "Humerus", "Radius"], correctAnswerIndex: 4, explanation: "" },
+        { id: 134, topic: "OSTEOLOGY", type: "matching", question: "Bones of the shoulder girdle", options: ["Acromion", "Deltoid tuberosity", "Clavicle", "Humerus", "Radius"], correctAnswerIndex: 2, explanation: "" },
+        { id: 135, topic: "OSTEOLOGY", type: "matching", question: "Arm bone", options: ["Acromion", "Deltoid tuberosity", "Clavicle", "Humerus", "Radius"], correctAnswerIndex: 3, explanation: "" },
+        { id: 136, topic: "OSTEOLOGY", type: "matching", question: "Raised area on the lateral surface of the humerus to which deltoid muscle attaches", options: ["Acromion", "Deltoid tuberosity", "Clavicle", "Humerus", "Radius"], correctAnswerIndex: 1, explanation: "" },
+        { id: 137, topic: "OSTEOLOGY", type: "matching", question: "The 'collarbone'", options: ["Acromion", "Deltoid tuberosity", "Clavicle", "Humerus", "Radius"], correctAnswerIndex: 2, explanation: "" },
+        { id: 138, topic: "OSTEOLOGY", type: "matching", question: "Shoulder girdle bone that articulates with and transmits forces to the bony thorax", options: ["Acromion", "Deltoid tuberosity", "Clavicle", "Humerus", "Radius"], correctAnswerIndex: 2, explanation: "" },
+        { id: 139, topic: "OSTEOLOGY", type: "matching", question: "Shoulder girdle bone that is unattached to the axial skeleton", options: ["Glenoid cavity", "Scapula", "Coracoid process", "Trochlea", "Ulna"], correctAnswerIndex: 1, explanation: "" },
+        { id: 140, topic: "OSTEOLOGY", type: "matching", question: "Forearm bone involved in formation of the elbow joint", options: ["Glenoid cavity", "Scapula", "Coracoid process", "Trochlea", "Ulna"], correctAnswerIndex: 4, explanation: "" },
+        { id: 141, topic: "OSTEOLOGY", type: "matching", question: "Depression in the scapula that articulates with the humerus", options: ["Glenoid cavity", "Scapula", "Coracoid process", "Trochlea", "Ulna"], correctAnswerIndex: 0, explanation: "" },
+        { id: 142, topic: "OSTEOLOGY", type: "matching", question: "Distal condyle of the humerus that articulates with the ulna", options: ["Glenoid cavity", "Scapula", "Coracoid process", "Trochlea", "Ulna"], correctAnswerIndex: 3, explanation: "" },
+        { id: 143, topic: "OSTEOLOGY", type: "matching", question: "Process above the glenoid cavity that permits muscle attachment", options: ["Glenoid cavity", "Scapula", "Coracoid process", "Trochlea", "Ulna"], correctAnswerIndex: 2, explanation: "" },
+        { id: 144, topic: "OSTEOLOGY", type: "matching", question: "Bones that articulate with the clavicle", options: ["Glenoid cavity", "Scapula", "Coracoid process", "Trochlea", "Ulna"], correctAnswerIndex: 1, explanation: "" },
+        { id: 145, topic: "OSTEOLOGY", type: "matching", question: "Medial bone of forearm in the anatomical position", options: ["Glenoid cavity", "Scapula", "Coracoid process", "Trochlea", "Ulna"], correctAnswerIndex: 4, explanation: "" },
+
+        // MORE BONE MARKINGS
+        { id: 146, topic: "OSTEOLOGY", type: "matching", question: "Point where coxal bones join anteriorly", options: ["Capitulum", "Metacarpals", "Coronoid fossa", "Pubic symphysis", "Sacroiliac joint"], correctAnswerIndex: 3, explanation: "" },
+        { id: 147, topic: "OSTEOLOGY", type: "matching", question: "Joint between the axial skeleton and pelvic girdle", options: ["Capitulum", "Metacarpals", "Coronoid fossa", "Pubic symphysis", "Sacroiliac joint"], correctAnswerIndex: 4, explanation: "" },
+        { id: 148, topic: "OSTEOLOGY", type: "matching", question: "Heads of these bones form the knuckles", options: ["Capitulum", "Metacarpals", "Coronoid fossa", "Pubic symphysis", "Sacroiliac joint"], correctAnswerIndex: 1, explanation: "" },
+        { id: 149, topic: "OSTEOLOGY", type: "matching", question: "Anterior depression, superior to the trochlea, which receives part of the ulna when the forearm is flexed", options: ["Capitulum", "Metacarpals", "Coronoid fossa", "Pubic symphysis", "Sacroiliac joint"], correctAnswerIndex: 2, explanation: "" },
+        { id: 150, topic: "OSTEOLOGY", type: "matching", question: "Rounded knob on the humerus; adjoins the radius", options: ["Capitulum", "Metacarpals", "Coronoid fossa", "Pubic symphysis", "Sacroiliac joint"], correctAnswerIndex: 0, explanation: "" },
+
+        // SKULL/FACE/VERTEBRAE CLASSIFICATION
+        { id: 151, topic: "OSTEOLOGY", type: "matching", question: "It corresponds to the carpus of the hand", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 0, explanation: "" },
+        { id: 152, topic: "OSTEOLOGY", type: "matching", question: "This bone forms the framework of the face", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 1, explanation: "" },
+        { id: 153, topic: "OSTEOLOGY", type: "matching", question: "It forms the posterior half of the foot", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 0, explanation: "" },
+        { id: 154, topic: "OSTEOLOGY", type: "matching", question: "Has a heart-shaped vertebral body", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 3, explanation: "" },
+        { id: 155, topic: "OSTEOLOGY", type: "matching", question: "It contains cavities for the sense organs for sight, smell and taste", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 1, explanation: "" },
+        { id: 156, topic: "OSTEOLOGY", type: "matching", question: "Has a massive vertebral body", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 4, explanation: "" },
+        { id: 157, topic: "OSTEOLOGY", type: "matching", question: "It provides openings for air and food", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 1, explanation: "" },
+        { id: 158, topic: "OSTEOLOGY", type: "matching", question: "Has a long sharp, inferiorly projecting spine", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 3, explanation: "" },
+        { id: 159, topic: "OSTEOLOGY", type: "matching", question: "It secures the teeth and anchors the muscles of facial expression", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 1, explanation: "" },
+        { id: 160, topic: "OSTEOLOGY", type: "matching", question: "Has a short bifid spinous process", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 2, explanation: "" },
+        { id: 161, topic: "OSTEOLOGY", type: "matching", question: "It is made up of flat bones", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 1, explanation: "" },
+        { id: 162, topic: "OSTEOLOGY", type: "matching", question: "Has a foramen in the transverse process", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 2, explanation: "" },
+        { id: 163, topic: "OSTEOLOGY", type: "matching", question: "Its bones are united by interlocking joints called sutures", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 1, explanation: "" },
+        { id: 164, topic: "OSTEOLOGY", type: "matching", question: "Has a circular vertebral foramen and facets for ribs", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 3, explanation: "" },
+        { id: 165, topic: "OSTEOLOGY", type: "matching", question: "It contains three step-like fossae", options: ["Tarsus", "Skull", "Cervical vertebrae", "Thoracic vertebrae", "Lumbar vertebrae"], correctAnswerIndex: 1, explanation: "" },
+
+        // BONE FEATURE MATCHING
+        { id: 166, topic: "OSTEOLOGY", type: "matching", question: "Sharp, slender process", options: ["Spine", "Crest", "Tubercle", "Head", "Tuberosity"], correctAnswerIndex: 0, explanation: "" },
+        { id: 167, topic: "OSTEOLOGY", type: "matching", question: "Small rounded projection", options: ["Spine", "Crest", "Tubercle", "Head", "Tuberosity"], correctAnswerIndex: 2, explanation: "" },
+        { id: 168, topic: "OSTEOLOGY", type: "matching", question: "Narrow ridge of bone", options: ["Spine", "Crest", "Tubercle", "Head", "Tuberosity"], correctAnswerIndex: 1, explanation: "" },
+        { id: 169, topic: "OSTEOLOGY", type: "matching", question: "Large rounded projection", options: ["Spine", "Crest", "Tubercle", "Head", "Tuberosity"], correctAnswerIndex: 4, explanation: "" },
+        { id: 170, topic: "OSTEOLOGY", type: "matching", question: "Structure supported on neck", options: ["Spine", "Crest", "Tubercle", "Head", "Tuberosity"], correctAnswerIndex: 3, explanation: "" },
+        { id: 171, topic: "OSTEOLOGY", type: "matching", question: "Armlike projection", options: ["Condyle", "Ramus", "Fissure", "Foramen", "Meatus"], correctAnswerIndex: 1, explanation: "" },
+        { id: 172, topic: "OSTEOLOGY", type: "matching", question: "Rounded articular projection", options: ["Condyle", "Ramus", "Fissure", "Foramen", "Meatus"], correctAnswerIndex: 0, explanation: "" },
+        { id: 173, topic: "OSTEOLOGY", type: "matching", question: "Narrow slit-like opening", options: ["Condyle", "Ramus", "Fissure", "Foramen", "Meatus"], correctAnswerIndex: 2, explanation: "" },
+        { id: 174, topic: "OSTEOLOGY", type: "matching", question: "Canal-like structure", options: ["Condyle", "Ramus", "Fissure", "Foramen", "Meatus"], correctAnswerIndex: 4, explanation: "" },
+        { id: 175, topic: "OSTEOLOGY", type: "matching", question: "Round or oval opening through a bone", options: ["Condyle", "Ramus", "Fissure", "Foramen", "Meatus"], correctAnswerIndex: 3, explanation: "" },
+
+        // CRANIAL BONE IDENTIFICATION
+        { id: 176, topic: "OSTEOLOGY", type: "matching", question: "It is surrounded by the temporal bone", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 4, explanation: "" },
+        { id: 177, topic: "OSTEOLOGY", type: "matching", question: "Middle ear found here", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 4, explanation: "" },
+        { id: 178, topic: "OSTEOLOGY", type: "matching", question: "Contains the foramen magnum", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 1, explanation: "" },
+        { id: 179, topic: "OSTEOLOGY", type: "matching", question: "Condyles articulate with the atlas", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 1, explanation: "" },
+        { id: 180, topic: "OSTEOLOGY", type: "matching", question: "Site of styloid processes", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 4, explanation: "" },
+        { id: 181, topic: "OSTEOLOGY", type: "matching", question: "Site of cribriform plate", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 3, explanation: "" },
+        { id: 182, topic: "OSTEOLOGY", type: "matching", question: "Site of sella turcica", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 2, explanation: "" },
+        { id: 183, topic: "OSTEOLOGY", type: "matching", question: "Site of mastoid process", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 4, explanation: "" },
+        { id: 184, topic: "OSTEOLOGY", type: "matching", question: "Superior and middle nasal conchae formed from its projections", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 3, explanation: "" },
+        { id: 185, topic: "OSTEOLOGY", type: "matching", question: "Single irregular bat-shaped bone forming part of the cranial floor", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 2, explanation: "" },
+        { id: 186, topic: "OSTEOLOGY", type: "matching", question: "Forehead bone", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 0, explanation: "" },
+
+        // TRUE/FALSE OSTEOLOGY STATEMENTS
+        { id: 187, topic: "OSTEOLOGY", type: "true-false", question: "The mandible is considered as the keystone bone of the facial skeleton.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+        { id: 188, topic: "OSTEOLOGY", type: "true-false", question: "The zygomatic bones are commonly known as the cheekbones.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 189, topic: "OSTEOLOGY", type: "true-false", question: "The lacrimal bones contain a sac that gathers tears.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 190, topic: "OSTEOLOGY", type: "true-false", question: "The vomer is located within the nasal cavity forming the inferior part of the nasal septum.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 191, topic: "OSTEOLOGY", type: "true-false", question: "The lacrimal bones are very small bones which form the medial wall of each orbit.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 192, topic: "OSTEOLOGY", type: "true-false", question: "Failure of the maxillae to fuse causes a condition known as cleft palate.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 193, topic: "OSTEOLOGY", type: "true-false", question: "The temporal bone houses the apparatus of the internal and middle ear.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 194, topic: "OSTEOLOGY", type: "true-false", question: "The sphenoid bone is a wing-shaped bone that extends behind the eyes and forms part of the floor of the cranial vault.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 195, topic: "OSTEOLOGY", type: "true-false", question: "The Maxillae are the bones that contain teeth.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 196, topic: "OSTEOLOGY", type: "true-false", question: "The axis or C2 vertebra has a projection called the dens that allows the axis to pivot.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 197, topic: "OSTEOLOGY", type: "true-false", question: "The hyoid acts as an attachment point for muscles in the neck region to connect the muscles in the lower jaw region.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 198, topic: "OSTEOLOGY", type: "true-false", question: "The xiphoid process is somewhat fragile and may break if pressed and puncture internal organs.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 199, topic: "OSTEOLOGY", type: "true-false", question: "The maxilla are the largest and strongest bones of the face.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+        { id: 200, topic: "OSTEOLOGY", type: "true-false", question: "The female pelvis is broader with a heart-shaped inlet and relatively deep for childbearing.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+
+        // JOINTS (59 questions)
+        { id: 201, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The thoracic vertebra that articulates posteriorly with the indicated rib (*) in figure 14 is:", options: ["T7", "T8", "T9", "T10", "T11"], correctAnswerIndex: 1, explanation: "" },
+        { id: 202, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "The capitulum and the coronoid process in figure 15 are marked as:", options: ["A and D", "B and F", "C and E", "D and F", "F and A"], correctAnswerIndex: 1, explanation: "" },
+        { id: 203, topic: "JOINTS", type: "mcq", question: "A zygapophyseal joint is a synovial joint between the superior and inferior articular processes of adjacent vertebrae. The inferior articular process in figure 9 is:", options: ["A", "B", "C", "D", "E"], correctAnswerIndex: 3, explanation: "" },
+        { id: 204, topic: "JOINTS", type: "mcq", question: "A variety of vertebral ligaments keep the bones of the vertebral column stabilized together. The letter on figure 16 that indicates an attachment for the posterior longitudinal ligament is:", options: ["A", "B", "C", "D", "E"], correctAnswerIndex: 2, explanation: "" },
+        { id: 205, topic: "JOINTS", type: "mcq", question: "What is the major function of the intervertebral discs?", options: ["Absorb shock", "String the vertebrae together", "Prevent injuries", "Prevent hyperextension", "Protects the vertebrae"], correctAnswerIndex: 0, explanation: "" },
+        { id: 206, topic: "JOINTS", type: "mcq", question: "Ankylosis means:", options: ["Twisting of the ankle", "Tearing of ligaments", "Displacement of a bone", "Immobility of a joint due to fusion of the articular surfaces", "B and C are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 207, topic: "JOINTS", type: "mcq", question: "An autoimmune disorder in which joints are affected bilaterally and which involves pannus formation and gradual joint immobilization is:", options: ["Bursitis", "Gout", "Osteoarthritis", "Rheumatoid arthritis", "A and B are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 208, topic: ["OSTEOLOGY", "JOINTS"], type: "mcq", question: "Which of the following are responsible for nodding 'yes,' and for shaking your head 'no'?", options: ["Axis and atlas respectively", "Atlas and axis respectively", "Occipital condyles and odontoid process respectively", "Odontoid process and occipital condyles respectively", "Occipital condyles and odontoid process of atlas respectively"], correctAnswerIndex: 1, explanation: "" },
+        { id: 209, topic: "JOINTS", type: "mcq", question: "All synovial joints have the following structural characteristics:", options: ["The joint surfaces are enclosed by a two-layered articular capsule", "The inner layer is the synovial membrane", "The outer layer is the fibrous capsule", "Articular cartilage covers the surfaces of the bones forming the joint", "All the above are true"], correctAnswerIndex: 4, explanation: "" },
+        { id: 210, topic: "JOINTS", type: "mcq", question: "FIBROUS JOINT:", options: ["The bones are connected by dense regular connective tissue", "Articular cartilage is present", "No joint cavity is present", "A, B and C are correct", "A and C are correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 211, topic: "JOINTS", type: "mcq", question: "Suture:", options: ["Joint in which bones are tightly bound by a minimal amount of fibrous connective tissue", "The edges of the joining bones are wavy and interlock", "Knits the bones together and allows growth at the edges", "In adulthood the immobility of this joint is a protective adaptation", "All the above are correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 212, topic: "JOINTS", type: "mcq", question: "SYNOVIAL JOINTS:", options: ["Have 2 layers of articular capsules", "Have a fibrous capsule of dense irregular connective tissue", "Have a synovial membrane of loose connective tissue", "A and C are correct", "A, B and C are correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 213, topic: "JOINTS", type: "mcq", question: "SYNOVIAL JOINTS possess:", options: ["Hyaline cartilage at the ends of the opposing bones", "Hyaline cartilage that absorbs compressive forces", "A joint cavity", "A and C are correct", "All of the above"], correctAnswerIndex: 3, explanation: "" },
+        { id: 214, topic: "JOINTS", type: "mcq", question: "Pivot joint:", options: ["Joint in which the rounded end of one bone fits into a ring formed by another bone", "Has an encircling ligament", "Is uniaxial", "A and B are correct", "A, B, and C are all correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 215, topic: "JOINTS", type: "mcq", question: "A BALL AND SOCKET JOINT:", options: ["Is multiaxial", "The spherical head of one bone fits into a round socket in another one", "Permits universal movement in all axes including rotation", "A, B and C are correct", "A and C are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 216, topic: "JOINTS", type: "mcq", question: "NONAXIAL JOINTS:", options: ["Allows only short gliding movements", "Does not involve rotation around any axis", "Is found between articular processes of vertebrae and between tarsal bones", "A, B and C are correct", "A and C are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 217, topic: "JOINTS", type: "mcq", question: "UNIAXIAL JOINTS:", options: ["Allow movement around one axis", "An example is the ankle joint", "An example is the interphalangeal joint", "A, B and C are correct", "A and C are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 218, topic: "JOINTS", type: "mcq", question: "BIAXIAL JOINT:", options: ["Movement occurs around 2 axes", "An example is the metacarpophalangeal joint", "An example is the wrist joint", "A, B and C are correct", "A and C are correct"], correctAnswerIndex: 3, explanation: "" },
+        { id: 219, topic: "JOINTS", type: "mcq", question: "MULTIAXIAL JOINT:", options: ["Universal movement is allowed in all axes", "Rotation is allowed in all axes", "An example is the shoulder joint", "A, B and C are correct", "A and C are correct"], correctAnswerIndex: 3, explanation: "" },
+
+        // JOINTS TRUE/FALSE
+        { id: 220, topic: ["OSTEOLOGY", "JOINTS"], type: "true-false", question: "The tubercle of a rib articulates with the transverse process of a vertebra.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 221, topic: ["OSTEOLOGY", "JOINTS"], type: "true-false", question: "The lateral condyle of the femur articulates with the lateral condyle of the tibia.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 222, topic: ["OSTEOLOGY", "JOINTS"], type: "true-false", question: "The medial condyle of the femur articulates with the medial condyle of the Tibia.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 223, topic: ["OSTEOLOGY", "JOINTS"], type: "true-false", question: "The nucleus pulposus of intervertebral discs gives the discs elasticity and compressibility.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 224, topic: ["OSTEOLOGY", "JOINTS"], type: "true-false", question: "The anulus fibrosus of intervertebral discs limits expansion and holds successive vertebrae together.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 225, topic: ["OSTEOLOGY", "JOINTS"], type: "true-false", question: "The glenoid cavity of the scapula is relatively shallow.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 226, topic: ["OSTEOLOGY", "JOINTS"], type: "true-false", question: "The acetabulum of the pelvis is a deep socket.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+
+        // CONNECTIVE TISSUE
+        { id: 227, topic: "CONNECTIVE TISSUE", type: "mcq", question: "A flattened sheet of tendon is called:", options: ["Raphe", "Bursa", "Aponeurosis", "Retinaculum", "Synovial sheath"], correctAnswerIndex: 2, explanation: "" },
+        { id: 228, topic: "CONNECTIVE TISSUE", type: "mcq", question: "A fibrous sheath that surrounds and protects individual fascicles of a muscle is called:", options: ["Perimysium", "Endomysium", "Sarcomere", "Myofilament", "Epimysium"], correctAnswerIndex: 0, explanation: "" },
+
+        // EMBRYOLOGY
+        { id: 229, topic: "EMBRYOLOGY", type: "mcq", question: "The skeleton with the highest number of bones is that of:", options: ["A foetus", "A newborn infant", "A 10-year-old child", "A 40-year-old woman", "A 70-year-old man"], correctAnswerIndex: 2, explanation: "" },
+        { id: 230, topic: ["OSTEOLOGY", "EMBRYOLOGY"], type: "true-false", question: "Fontanelles are regions of unossified, fibrous membrane in the skull allowing the cranium to grow.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 231, topic: ["OSTEOLOGY", "EMBRYOLOGY"], type: "true-false", question: "The flexibility fontanelles impart to the foetal skull helps to ease the delivery of the child.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+        { id: 232, topic: "EMBRYOLOGY", type: "mcq", question: "The tibia is formed from which of the following during foetal life?", options: ["Mesenchymal tissue", "Cartilage", "Mesenchymal tissue and cartilage", "Epithelial tissue", "Dense connective tissue"], correctAnswerIndex: 2, explanation: "" },
+        { id: 233, topic: "EMBRYOLOGY", type: "mcq", question: "The following features are observed during intramembranous ossification: i. Modulation of osteoprogenitor ii. Secretion of matrix iii. Formation of spicules iv. Confluence of spicules v. Transformation of spongy bone to compact bone", options: ["i and ii are correct", "i and iii are correct", "ii and iii are correct", "ii and iv are correct", "i-v are all correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 234, topic: "EMBRYOLOGY", type: "mcq", question: "Intramembranous ossification occurs in the:", options: ["Clavicle", "Sternum", "Scapula", "A and B are correct", "A, B, C are all correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 235, topic: "EMBRYOLOGY", type: "mcq", question: "Endochondral ossification shows the following features: i. Zone of proliferation ii. Zone of cell maturation iii. Zone of calcifying cartilage", options: ["i and ii are correct", "i and iii are correct", "ii and iii are correct", "None of the above are correct", "i-iii are all correct"], correctAnswerIndex: 4, explanation: "" },
+        { id: 236, topic: "EMBRYOLOGY", type: "mcq", question: "Endochondral ossification occurs in the:", options: ["Ribs", "Phalanges", "Fibula", "All the above are correct", "None of the above"], correctAnswerIndex: 3, explanation: "" },
+        // INTRODUCTION - Remaining
+        { id: 237, topic: "INTRODUCTION", type: "true-false", question: "The anatomical position has the palms facing posteriorly.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 238, topic: "INTRODUCTION", type: "true-false", question: "The median sagittal plane divides the body into equal left and right halves.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 239, topic: "INTRODUCTION", type: "true-false", question: "The frontal plane divides the body into superior and inferior portions.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 240, topic: "INTRODUCTION", type: "true-false", question: "The transverse plane is also called the horizontal plane.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 241, topic: "INTRODUCTION", type: "true-false", question: "The term 'proximal' means closer to the point of attachment to the trunk.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+// OSTEOLOGY True/False - Remaining
+{ id: 242, topic: "OSTEOLOGY", type: "true-false", question: "The mandible is the only movable bone of the skull.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 243, topic: "OSTEOLOGY", type: "true-false", question: "The ethmoid bone contributes to the formation of the nasal septum.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 244, topic: "OSTEOLOGY", type: "true-false", question: "The sphenoid bone contains the sella turcica which houses the pituitary gland.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 245, topic: "OSTEOLOGY", type: "true-false", question: "The temporal bone contains the external acoustic meatus.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 246, topic: "OSTEOLOGY", type: "true-false", question: "The occipital bone contains the foramen magnum.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 247, topic: "OSTEOLOGY", type: "true-false", question: "The frontal bone contains the supraorbital foramen.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 248, topic: "OSTEOLOGY", type: "true-false", question: "The zygomatic bone forms the cheekbone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 249, topic: "OSTEOLOGY", type: "true-false", question: "The lacrimal bones contain the nasolacrimal canal.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 250, topic: "OSTEOLOGY", type: "true-false", question: "The vomer forms the inferior part of the nasal septum.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 251, topic: "OSTEOLOGY", type: "true-false", question: "The palatine bones form the posterior part of the hard palate.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 252, topic: "OSTEOLOGY", type: "true-false", question: "The inferior nasal conchae are separate facial bones.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 253, topic: "OSTEOLOGY", type: "true-false", question: "The hyoid bone is part of the axial skeleton.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 254, topic: "OSTEOLOGY", type: "true-false", question: "The atlas (C1) lacks a vertebral body.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 255, topic: "OSTEOLOGY", type: "true-false", question: "The axis (C2) has a dens that articulates with the atlas.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 256, topic: "OSTEOLOGY", type: "true-false", question: "The vertebra prominens is C7.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 257, topic: "OSTEOLOGY", type: "true-false", question: "Thoracic vertebrae have transverse foramina.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 258, topic: "OSTEOLOGY", type: "true-false", question: "Lumbar vertebrae have the largest bodies.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 259, topic: "OSTEOLOGY", type: "true-false", question: "The sacrum is formed by the fusion of 5 sacral vertebrae.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 260, topic: "OSTEOLOGY", type: "true-false", question: "The coccyx is also known as the tailbone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 261, topic: "OSTEOLOGY", type: "true-false", question: "The sternum consists of the manubrium, body, and xiphoid process.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 262, topic: "OSTEOLOGY", type: "true-false", question: "The clavicle is the only long bone that lies horizontally.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 263, topic: "OSTEOLOGY", type: "true-false", question: "The scapula has a glenoid cavity that articulates with the humerus.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 264, topic: "OSTEOLOGY", type: "true-false", question: "The acromion process is part of the scapula.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 265, topic: "OSTEOLOGY", type: "true-false", question: "The coracoid process is located on the scapula.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 266, topic: "OSTEOLOGY", type: "true-false", question: "The head of the humerus articulates with the glenoid cavity.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 267, topic: "OSTEOLOGY", type: "true-false", question: "The anatomical neck of the humerus is the site of frequent fractures.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 268, topic: "OSTEOLOGY", type: "true-false", question: "The surgical neck of the humerus is the site of frequent fractures.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 269, topic: "OSTEOLOGY", type: "true-false", question: "The radius is located on the lateral side of the forearm.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 270, topic: "OSTEOLOGY", type: "true-false", question: "The ulna is located on the medial side of the forearm.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 271, topic: "OSTEOLOGY", type: "true-false", question: "The olecranon process is part of the ulna.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 272, topic: "OSTEOLOGY", type: "true-false", question: "The carpals are short bones arranged in two rows of four.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 273, topic: "OSTEOLOGY", type: "true-false", question: "The scaphoid is the most commonly fractured carpal bone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 274, topic: "OSTEOLOGY", type: "true-false", question: "The femur is the longest and heaviest bone in the body.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 275, topic: "OSTEOLOGY", type: "true-false", question: "The patella is a sesamoid bone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 276, topic: "OSTEOLOGY", type: "true-false", question: "The tibia bears weight and is the medial bone of the leg.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 277, topic: "OSTEOLOGY", type: "true-false", question: "The fibula does not bear weight.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 278, topic: "OSTEOLOGY", type: "true-false", question: "The lateral malleolus is part of the fibula.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 279, topic: "OSTEOLOGY", type: "true-false", question: "The medial malleolus is part of the tibia.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 280, topic: "OSTEOLOGY", type: "true-false", question: "The calcaneus is the heel bone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 281, topic: "OSTEOLOGY", type: "true-false", question: "The talus articulates with the tibia and fibula.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 282, topic: "OSTEOLOGY", type: "true-false", question: "The pelvic girdle consists of the ilium, ischium, and pubis.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 283, topic: "OSTEOLOGY", type: "true-false", question: "The obturator foramen is a large opening in the hip bone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 284, topic: "OSTEOLOGY", type: "true-false", question: "The acetabulum is the socket that receives the head of the femur.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 285, topic: "OSTEOLOGY", type: "true-false", question: "The female pelvis is wider and shallower than the male pelvis.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 286, topic: "OSTEOLOGY", type: "true-false", question: "The male pelvis has a heart-shaped pelvic inlet.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+// JOINTS - Remaining MCQs
+{ id: 287, topic: "JOINTS", type: "mcq", question: "Which type of joint is the knee joint?", options: ["Hinge joint", "Ball and socket joint", "Pivot joint", "Condyloid joint", "Saddle joint"], correctAnswerIndex: 0, explanation: "" },
+{ id: 288, topic: "JOINTS", type: "mcq", question: "Which type of joint is the shoulder joint?", options: ["Hinge joint", "Ball and socket joint", "Pivot joint", "Condyloid joint", "Saddle joint"], correctAnswerIndex: 1, explanation: "" },
+{ id: 289, topic: "JOINTS", type: "mcq", question: "Which type of joint is the hip joint?", options: ["Hinge joint", "Ball and socket joint", "Pivot joint", "Condyloid joint", "Saddle joint"], correctAnswerIndex: 1, explanation: "" },
+{ id: 290, topic: "JOINTS", type: "mcq", question: "Which type of joint is the elbow joint?", options: ["Hinge joint", "Ball and socket joint", "Pivot joint", "Condyloid joint", "Saddle joint"], correctAnswerIndex: 0, explanation: "" },
+{ id: 291, topic: "JOINTS", type: "mcq", question: "Which type of joint is the atlantoaxial joint?", options: ["Hinge joint", "Ball and socket joint", "Pivot joint", "Condyloid joint", "Saddle joint"], correctAnswerIndex: 2, explanation: "" },
+{ id: 292, topic: "JOINTS", type: "mcq", question: "Which type of joint is the temporomandibular joint?", options: ["Hinge joint", "Ball and socket joint", "Pivot joint", "Condyloid joint", "Saddle joint"], correctAnswerIndex: 3, explanation: "" },
+{ id: 293, topic: "JOINTS", type: "mcq", question: "Which type of joint is the carpometacarpal joint of the thumb?", options: ["Hinge joint", "Ball and socket joint", "Pivot joint", "Condyloid joint", "Saddle joint"], correctAnswerIndex: 4, explanation: "" },
+{ id: 294, topic: "JOINTS", type: "mcq", question: "Which ligament is commonly injured in ankle sprains?", options: ["Anterior cruciate ligament", "Posterior cruciate ligament", "Medial collateral ligament", "Lateral collateral ligament", "Anterior talofibular ligament"], correctAnswerIndex: 4, explanation: "" },
+{ id: 295, topic: "JOINTS", type: "mcq", question: "Which ligament is torn in a 'shoulder dislocation'?", options: ["Coracoacromial ligament", "Coracoclavicular ligament", "Glenohumeral ligament", "Acromioclavicular ligament", "Supraspinatus tendon"], correctAnswerIndex: 2, explanation: "" },
+{ id: 296, topic: "JOINTS", type: "mcq", question: "The pubic symphysis is an example of which type of joint?", options: ["Fibrous joint", "Cartilaginous joint", "Synovial joint", "Pivot joint", "Ball and socket joint"], correctAnswerIndex: 1, explanation: "" },
+{ id: 297, topic: "JOINTS", type: "mcq", question: "The intervertebral discs are examples of which type of joint?", options: ["Fibrous joint", "Cartilaginous joint", "Synovial joint", "Pivot joint", "Hinge joint"], correctAnswerIndex: 1, explanation: "" },
+{ id: 298, topic: "JOINTS", type: "mcq", question: "The sutures of the skull are examples of which type of joint?", options: ["Fibrous joint", "Cartilaginous joint", "Synovial joint", "Pivot joint", "Hinge joint"], correctAnswerIndex: 0, explanation: "" },
+{ id: 299, topic: "JOINTS", type: "mcq", question: "Which of the following is NOT a feature of a synovial joint?", options: ["Articular cartilage", "Joint cavity", "Synovial fluid", "Intervertebral disc", "Articular capsule"], correctAnswerIndex: 3, explanation: "" },
+// JOINTS True/False - Remaining
+{ id: 300, topic: "JOINTS", type: "true-false", question: "Synovial joints contain synovial fluid which reduces friction.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 301, topic: "JOINTS", type: "true-false", question: "Bursae are fluid-filled sacs that reduce friction between tendons and bones.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 302, topic: "JOINTS", type: "true-false", question: "Tendon sheaths are specialized bursae that wrap around tendons.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 303, topic: "JOINTS", type: "true-false", question: "Arthritis is inflammation of joints.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 304, topic: "JOINTS", type: "true-false", question: "Osteoarthritis is an autoimmune disorder.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 305, topic: "JOINTS", type: "true-false", question: "Rheumatoid arthritis is an autoimmune disorder.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 306, topic: "JOINTS", type: "true-false", question: "Gout is caused by uric acid crystal deposition in joints.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 307, topic: "JOINTS", type: "true-false", question: "The anterior cruciate ligament (ACL) prevents anterior displacement of the tibia.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 308, topic: "JOINTS", type: "true-false", question: "The posterior cruciate ligament (PCL) prevents posterior displacement of the tibia.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 309, topic: "JOINTS", type: "true-false", question: "The menisci of the knee are fibrocartilage discs that absorb shock.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+// EMBRYOLOGY - Remaining
+{ id: 310, topic: "EMBRYOLOGY", type: "mcq", question: "The study of development before birth is called:", options: ["Histology", "Cytology", "Embryology", "Pathology", "Anatomy"], correctAnswerIndex: 2, explanation: "" },
+{ id: 311, topic: "EMBRYOLOGY", type: "mcq", question: "The fertilized egg is called a:", options: ["Zygote", "Morula", "Blastocyst", "Embryo", "Fetus"], correctAnswerIndex: 0, explanation: "" },
+{ id: 312, topic: "EMBRYOLOGY", type: "mcq", question: "The stage at which the embryo implants into the uterine wall is the:", options: ["Zygote", "Morula", "Blastocyst", "Gastrula", "Neurula"], correctAnswerIndex: 2, explanation: "" },
+{ id: 313, topic: "EMBRYOLOGY", type: "mcq", question: "The three primary germ layers are:", options: ["Ectoderm, mesoderm, endoderm", "Epiderm, mesoderm, endoderm", "Ectoderm, mesoderm, epidermis", "Ectoderm, mesentery, endoderm", "Epithelium, mesoderm, endoderm"], correctAnswerIndex: 0, explanation: "" },
+{ id: 314, topic: "EMBRYOLOGY", type: "mcq", question: "The nervous system develops from which germ layer?", options: ["Ectoderm", "Mesoderm", "Endoderm", "All three", "None"], correctAnswerIndex: 0, explanation: "" },
+{ id: 315, topic: "EMBRYOLOGY", type: "mcq", question: "The skeletal system develops from which germ layer?", options: ["Ectoderm", "Mesoderm", "Endoderm", "All three", "None"], correctAnswerIndex: 1, explanation: "" },
+{ id: 316, topic: "EMBRYOLOGY", type: "mcq", question: "The digestive system develops from which germ layer?", options: ["Ectoderm", "Mesoderm", "Endoderm", "All three", "None"], correctAnswerIndex: 2, explanation: "" },
+{ id: 317, topic: "EMBRYOLOGY", type: "mcq", question: "The process of formation of the neural tube is called:", options: ["Gastrulation", "Neurulation", "Organogenesis", "Fertilization", "Implantation"], correctAnswerIndex: 1, explanation: "" },
+{ id: 318, topic: "EMBRYOLOGY", type: "true-false", question: "The embryonic period is from fertilization to 8 weeks.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 319, topic: "EMBRYOLOGY", type: "true-false", question: "The fetal period is from 9 weeks to birth.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 320, topic: "EMBRYOLOGY", type: "true-false", question: "Most congenital malformations occur during the fetal period.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 321, topic: "EMBRYOLOGY", type: "true-false", question: "The notochord induces the formation of the neural tube.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+// BLOOD SUPPLY
+{ id: 322, topic: "OSTEOLOGY", type: "mcq", question: "The major artery supplying the upper limb is the:", options: ["Subclavian artery", "Brachial artery", "Radial artery", "Ulnar artery", "Axillary artery"], correctAnswerIndex: 0, explanation: "" },
+{ id: 323, topic: "OSTEOLOGY", type: "mcq", question: "The major artery supplying the lower limb is the:", options: ["Femoral artery", "External iliac artery", "Common iliac artery", "Popliteal artery", "Dorsalis pedis artery"], correctAnswerIndex: 1, explanation: "" },
+{ id: 324, topic: "OSTEOLOGY", type: "mcq", question: "The artery that supplies the brain with blood is the:", options: ["Carotid artery", "Vertebral artery", "Both carotid and vertebral", "Subclavian artery", "Brachiocephalic artery"], correctAnswerIndex: 2, explanation: "" },
+{ id: 325, topic: "OSTEOLOGY", type: "mcq", question: "The great saphenous vein is found in the:", options: ["Upper limb", "Lower limb", "Neck", "Thorax", "Abdomen"], correctAnswerIndex: 1, explanation: "" },
+{ id: 326, topic: "OSTEOLOGY", type: "mcq", question: "The cephalic vein is found in the:", options: ["Upper limb", "Lower limb", "Neck", "Thorax", "Abdomen"], correctAnswerIndex: 0, explanation: "" },
+{ id: 327, topic: "OSTEOLOGY", type: "mcq", question: "Which vein is commonly used for venipuncture at the elbow?", options: ["Cephalic vein", "Basilic vein", "Median cubital vein", "Radial vein", "Ulnar vein"], correctAnswerIndex: 2, explanation: "" },
+{ id: 328, topic: "OSTEOLOGY", type: "mcq", question: "The femoral artery becomes the popliteal artery after passing through which structure?", options: ["Femoral triangle", "Adductor hiatus", "Popliteal fossa", "Saphenous opening", "Obturator foramen"], correctAnswerIndex: 1, explanation: "" },
+
+// NERVE SUPPLY
+{ id: 329, topic: "OSTEOLOGY", type: "mcq", question: "The largest cranial nerve is the:", options: ["Olfactory nerve (I)", "Optic nerve (II)", "Trigeminal nerve (V)", "Facial nerve (VII)", "Vagus nerve (X)"], correctAnswerIndex: 2, explanation: "" },
+{ id: 330, topic: "OSTEOLOGY", type: "mcq", question: "The nerve responsible for vision is the:", options: ["Olfactory nerve (I)", "Optic nerve (II)", "Oculomotor nerve (III)", "Trochlear nerve (IV)", "Abducens nerve (VI)"], correctAnswerIndex: 1, explanation: "" },
+{ id: 331, topic: "OSTEOLOGY", type: "mcq", question: "The nerve responsible for smell is the:", options: ["Olfactory nerve (I)", "Optic nerve (II)", "Trigeminal nerve (V)", "Facial nerve (VII)", "Vagus nerve (X)"], correctAnswerIndex: 0, explanation: "" },
+{ id: 332, topic: "OSTEOLOGY", type: "mcq", question: "The largest nerve in the body is the:", options: ["Sciatic nerve", "Femoral nerve", "Median nerve", "Ulnar nerve", "Radial nerve"], correctAnswerIndex: 0, explanation: "" },
+{ id: 333, topic: "OSTEOLOGY", type: "mcq", question: "Which nerve is compressed in carpal tunnel syndrome?", options: ["Median nerve", "Ulnar nerve", "Radial nerve", "Musculocutaneous nerve", "Axillary nerve"], correctAnswerIndex: 0, explanation: "" },
+{ id: 334, topic: "OSTEOLOGY", type: "mcq", question: "Which nerve is affected in 'foot drop'?", options: ["Femoral nerve", "Sciatic nerve", "Common peroneal nerve", "Tibial nerve", "Obturator nerve"], correctAnswerIndex: 2, explanation: "" },
+{ id: 335, topic: "OSTEOLOGY", type: "mcq", question: "Which nerve supplies the diaphragm?", options: ["Vagus nerve", "Phrenic nerve", "Intercostal nerve", "Thoracic nerve", "Accessory nerve"], correctAnswerIndex: 1, explanation: "" },
+{ id: 336, topic: "OSTEOLOGY", type: "mcq", question: "The brachial plexus supplies which region?", options: ["Head and neck", "Upper limb", "Lower limb", "Thorax", "Abdomen"], correctAnswerIndex: 1, explanation: "" },
+{ id: 337, topic: "OSTEOLOGY", type: "mcq", question: "The lumbar plexus supplies which region?", options: ["Head and neck", "Upper limb", "Lower limb", "Thorax", "Abdomen"], correctAnswerIndex: 2, explanation: "" },
+// MUSCLES
+{ id: 338, topic: "OSTEOLOGY", type: "mcq", question: "The muscle that closes the jaw is the:", options: ["Masseter", "Temporalis", "Both masseter and temporalis", "Buccinator", "Platysma"], correctAnswerIndex: 2, explanation: "" },
+{ id: 339, topic: "OSTEOLOGY", type: "mcq", question: "The largest muscle in the body is the:", options: ["Gluteus maximus", "Quadriceps femoris", "Latissimus dorsi", "Rectus abdominis", "Deltoid"], correctAnswerIndex: 0, explanation: "" },
+{ id: 340, topic: "OSTEOLOGY", type: "mcq", question: "The quadriceps femoris muscle inserts on which structure?", options: ["Tibial tuberosity", "Patella", "Femur", "Fibula", "Calcaneus"], correctAnswerIndex: 0, explanation: "" },
+{ id: 341, topic: "OSTEOLOGY", type: "mcq", question: "The Achilles tendon attaches which muscle to the calcaneus?", options: ["Gastrocnemius", "Soleus", "Both gastrocnemius and soleus", "Tibialis anterior", "Peroneus longus"], correctAnswerIndex: 2, explanation: "" },
+{ id: 342, topic: "OSTEOLOGY", type: "mcq", question: "The deltoid muscle abducts the arm and is supplied by which nerve?", options: ["Axillary nerve", "Radial nerve", "Median nerve", "Ulnar nerve", "Musculocutaneous nerve"], correctAnswerIndex: 0, explanation: "" },
+{ id: 343, topic: "OSTEOLOGY", type: "mcq", question: "The biceps brachii muscle inserts on which structure?", options: ["Radial tuberosity", "Ulnar tuberosity", "Coronoid process", "Olecranon process", "Styloid process"], correctAnswerIndex: 0, explanation: "" },
+{ id: 344, topic: "OSTEOLOGY", type: "mcq", question: "The triceps brachii muscle extends the elbow and is supplied by which nerve?", options: ["Axillary nerve", "Radial nerve", "Median nerve", "Ulnar nerve", "Musculocutaneous nerve"], correctAnswerIndex: 1, explanation: "" },
+{ id: 345, topic: "OSTEOLOGY", type: "mcq", question: "The diaphragm is innervated by which nerve?", options: ["Vagus nerve", "Phrenic nerve (C3-C5)", "Intercostal nerves", "Thoracic nerves", "Accessory nerve"], correctAnswerIndex: 1, explanation: "" },
+{ id: 346, topic: "OSTEOLOGY", type: "mcq", question: "Which muscle is the prime mover for breathing?", options: ["External intercostals", "Internal intercostals", "Diaphragm", "Serratus anterior", "Rectus abdominis"], correctAnswerIndex: 2, explanation: "" },
+// CLINICAL ANATOMY
+{ id: 347, topic: "OSTEOLOGY", type: "mcq", question: "The most common site for an intramuscular injection in the gluteal region is:", options: ["Upper outer quadrant", "Upper inner quadrant", "Lower outer quadrant", "Lower inner quadrant", "Center of the gluteal muscle"], correctAnswerIndex: 0, explanation: "" },
+{ id: 348, topic: "OSTEOLOGY", type: "mcq", question: "McBurney's point corresponds to the base of the appendix and is located:", options: ["One-third of the way from the ASIS to the umbilicus", "Two-thirds of the way from the ASIS to the umbilicus", "Midway between the umbilicus and pubic symphysis", "At the umbilicus", "At the pubic symphysis"], correctAnswerIndex: 1, explanation: "" },
+{ id: 349, topic: "OSTEOLOGY", type: "mcq", question: "The carotid pulse can be palpated at which level?", options: ["Cricoid cartilage (C6)", "Thyroid cartilage (C4)", "Hyoid bone (C3)", "Sternal notch (T2)", "Angle of the mandible (C1)"], correctAnswerIndex: 0, explanation: "" },
+{ id: 350, topic: "OSTEOLOGY", type: "mcq", question: "The apex beat of the heart is located at which intercostal space?", options: ["2nd intercostal space", "3rd intercostal space", "4th intercostal space", "5th intercostal space", "6th intercostal space"], correctAnswerIndex: 3, explanation: "" },
+{ id: 351, topic: "OSTEOLOGY", type: "mcq", question: "Lumbar puncture is performed between which vertebrae to avoid damaging the spinal cord?", options: ["L1-L2", "L2-L3", "L3-L4", "L4-L5", "L5-S1"], correctAnswerIndex: 2, explanation: "" },
+{ id: 352, topic: "OSTEOLOGY", type: "mcq", question: "The anatomical snuffbox is located at the base of the thumb and contains which bone?", options: ["Scaphoid", "Lunate", "Triquetrum", "Pisiform", "Trapezium"], correctAnswerIndex: 0, explanation: "" },
+{ id: 353, topic: "OSTEOLOGY", type: "mcq", question: "The inguinal ligament runs from which two points?", options: ["ASIS to pubic tubercle", "ASIS to pubic symphysis", "Iliac crest to pubic tubercle", "Iliac crest to pubic symphysis", "Pubic tubercle to pubic symphysis"], correctAnswerIndex: 0, explanation: "" },
+{ id: 354, topic: "OSTEOLOGY", type: "mcq", question: "The femoral triangle is bounded by which structures?", options: ["Inguinal ligament, sartorius, adductor longus", "Inguinal ligament, sartorius, gracilis", "Inguinal ligament, tensor fasciae latae, adductor longus", "Inguinal ligament, rectus femoris, adductor longus", "Inguinal ligament, pectineus, adductor longus"], correctAnswerIndex: 0, explanation: "" },
+// FORAMINA AND CONTENTS
+{ id: 355, topic: "OSTEOLOGY", type: "mcq", question: "The foramen magnum transmits which structure?", options: ["Spinal cord", "Internal carotid artery", "Middle meningeal artery", "Facial nerve", "Trigeminal nerve"], correctAnswerIndex: 0, explanation: "" },
+{ id: 356, topic: "OSTEOLOGY", type: "mcq", question: "The optic canal transmits which structure?", options: ["Optic nerve (CN II)", "Oculomotor nerve (CN III)", "Trochlear nerve (CN IV)", "Abducens nerve (CN VI)", "Ophthalmic artery"], correctAnswerIndex: 0, explanation: "" },
+{ id: 357, topic: "OSTEOLOGY", type: "mcq", question: "The superior orbital fissure transmits which nerves?", options: ["CN III, IV, V1, VI", "CN II, III, IV, VI", "CN III, IV, V2, VI", "CN III, IV, V3, VI", "CN II, III, IV, V1"], correctAnswerIndex: 0, explanation: "" },
+{ id: 358, topic: "OSTEOLOGY", type: "mcq", question: "The foramen rotundum transmits which nerve?", options: ["Maxillary nerve (V2)", "Mandibular nerve (V3)", "Ophthalmic nerve (V1)", "Facial nerve (VII)", "Trigeminal nerve (V)"], correctAnswerIndex: 0, explanation: "" },
+{ id: 359, topic: "OSTEOLOGY", type: "mcq", question: "The foramen ovale transmits which nerve?", options: ["Maxillary nerve (V2)", "Mandibular nerve (V3)", "Ophthalmic nerve (V1)", "Facial nerve (VII)", "Trigeminal nerve (V)"], correctAnswerIndex: 1, explanation: "" },
+{ id: 360, topic: "OSTEOLOGY", type: "mcq", question: "The stylomastoid foramen transmits which nerve?", options: ["Facial nerve (CN VII)", "Vagus nerve (CN X)", "Glossopharyngeal nerve (CN IX)", "Hypoglossal nerve (CN XII)", "Accessory nerve (CN XI)"], correctAnswerIndex: 0, explanation: "" },
+{ id: 361, topic: "OSTEOLOGY", type: "mcq", question: "The jugular foramen transmits which nerves?", options: ["CN IX, X, XI", "CN VII, VIII, IX", "CN X, XI, XII", "CN VIII, IX, X", "CN IX, X, XII"], correctAnswerIndex: 0, explanation: "" },
+// Additional Matching Questions
+{ id: 362, topic: "OSTEOLOGY", type: "matching", question: "Forms the forehead", options: ["Frontal bone", "Parietal bone", "Occipital bone", "Temporal bone", "Sphenoid bone"], correctAnswerIndex: 0, explanation: "" },
+{ id: 363, topic: "OSTEOLOGY", type: "matching", question: "Forms the roof of the skull", options: ["Frontal bone", "Parietal bone", "Occipital bone", "Temporal bone", "Sphenoid bone"], correctAnswerIndex: 1, explanation: "" },
+{ id: 364, topic: "OSTEOLOGY", type: "matching", question: "Contains the foramen magnum", options: ["Frontal bone", "Parietal bone", "Occipital bone", "Temporal bone", "Sphenoid bone"], correctAnswerIndex: 2, explanation: "" },
+{ id: 365, topic: "OSTEOLOGY", type: "matching", question: "Contains the external acoustic meatus", options: ["Frontal bone", "Parietal bone", "Occipital bone", "Temporal bone", "Sphenoid bone"], correctAnswerIndex: 3, explanation: "" },
+{ id: 366, topic: "OSTEOLOGY", type: "matching", question: "Contains the sella turcica", options: ["Frontal bone", "Parietal bone", "Occipital bone", "Temporal bone", "Sphenoid bone"], correctAnswerIndex: 4, explanation: "" },
+// OSTEOLOGY Bone Markings - Complete Set
+{ id: 367, topic: "OSTEOLOGY", type: "matching", question: "Forms the two upright branches of the mandible", options: ["Condyle", "Ramus", "Fissure", "Foramen", "Meatus"], correctAnswerIndex: 1, explanation: "" },
+{ id: 368, topic: "OSTEOLOGY", type: "matching", question: "It is surrounded by the temporal bone", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 4, explanation: "" },
+{ id: 369, topic: "OSTEOLOGY", type: "matching", question: "Middle ear found here", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 4, explanation: "" },
+{ id: 370, topic: "OSTEOLOGY", type: "matching", question: "Contains the foramen magnum", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 1, explanation: "" },
+{ id: 371, topic: "OSTEOLOGY", type: "matching", question: "Condyles articulate with the atlas", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 1, explanation: "" },
+{ id: 372, topic: "OSTEOLOGY", type: "matching", question: "Site of styloid processes", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 4, explanation: "" },
+{ id: 373, topic: "OSTEOLOGY", type: "matching", question: "Site of cribriform plate", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 3, explanation: "" },
+{ id: 374, topic: "OSTEOLOGY", type: "matching", question: "Site of sella turcica", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 2, explanation: "" },
+{ id: 375, topic: "OSTEOLOGY", type: "matching", question: "Site of mastoid process", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 4, explanation: "" },
+{ id: 376, topic: "OSTEOLOGY", type: "matching", question: "Superior and middle nasal conchae formed from its projections", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 3, explanation: "" },
+{ id: 377, topic: "OSTEOLOGY", type: "matching", question: "Single irregular bat-shaped bone forming part of the cranial floor", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 2, explanation: "" },
+{ id: 378, topic: "OSTEOLOGY", type: "matching", question: "Forehead bone", options: ["Frontal bone", "Occipital bone", "Sphenoid bone", "Ethmoid bone", "Temporal bone"], correctAnswerIndex: 0, explanation: "" },
+// OSTEOLOGY True/False - Complete from your document
+{ id: 379, topic: "OSTEOLOGY", type: "true-false", question: "The head of the humerus articulates with the glenoid fossa of the scapula.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 380, topic: "OSTEOLOGY", type: "true-false", question: "The ulna is the forearm bone that articulates with most of the carpal bones.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 381, topic: "OSTEOLOGY", type: "true-false", question: "Thoracic vertebrae have the thickest bodies and short blunt spinous processes.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 382, topic: "OSTEOLOGY", type: "true-false", question: "The coccyx is the fused rudimentary tailbone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 383, topic: "OSTEOLOGY", type: "true-false", question: "The axis is a circle of bone that articulates superiorly with the occipital condyles.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 384, topic: "OSTEOLOGY", type: "true-false", question: "Lumbar vertebrae have articular facets for the ribs.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 385, topic: "OSTEOLOGY", type: "true-false", question: "The lambdoid suture connects the frontal and parietal bones.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 386, topic: "OSTEOLOGY", type: "true-false", question: "The sagittal suture connects parietal and occipital bones.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 387, topic: "OSTEOLOGY", type: "true-false", question: "The squamosal suture connects temporal and parietal bones.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 388, topic: "OSTEOLOGY", type: "true-false", question: "The coronal suture connects the right and left parietal bones.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 389, topic: "OSTEOLOGY", type: "true-false", question: "The occipitomastoid suture connects temporal and parietal bones.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 390, topic: "OSTEOLOGY", type: "true-false", question: "All of the bones of the skull, except the mandible, are united by sutures and are immovable.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 391, topic: "OSTEOLOGY", type: "true-false", question: "The foramen magnum goes through the occipital bone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 392, topic: "OSTEOLOGY", type: "true-false", question: "The mastoid sinuses are located at a position in the skull where they are usually free from infections.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 393, topic: "OSTEOLOGY", type: "true-false", question: "The vertebral column is held in place primarily by the anterior and posterior longitudinal ligaments.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 394, topic: "OSTEOLOGY", type: "true-false", question: "The last two ribs are floating ribs because they have no anterior attachments.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 395, topic: "OSTEOLOGY", type: "true-false", question: "The most common site of fracture in the humerus is the surgical neck.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 396, topic: "OSTEOLOGY", type: "true-false", question: "The layman's name for the scapula is the collar bone.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 397, topic: "OSTEOLOGY", type: "true-false", question: "A temporal bone protrusion riddled with sinuses is the styloid process.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 398, topic: "OSTEOLOGY", type: "true-false", question: "Costal cartilages join most ribs to the sternum.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 399, topic: "OSTEOLOGY", type: "true-false", question: "In women of childbearing age, the dimensions of the true pelvis are of utmost importance.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 400, topic: "OSTEOLOGY", type: "true-false", question: "The term vertebrochondral ribs refers to ribs that attach to each other before they attach to the sternum.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 401, topic: "OSTEOLOGY", type: "true-false", question: "In the anatomical position, the lateral forearm bone is the radius.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 402, topic: "OSTEOLOGY", type: "true-false", question: "The vomer forms part of the nasal septum.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 403, topic: "OSTEOLOGY", type: "true-false", question: "The cranial vault of the skull is also called the calvaria.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 404, topic: "OSTEOLOGY", type: "true-false", question: "The lacrimal bones contain openings that provide a passage for the tear ducts.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 405, topic: "OSTEOLOGY", type: "true-false", question: "The largest and strongest bone of the face is the maxilla.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 406, topic: "OSTEOLOGY", type: "true-false", question: "There are seven cervical, twelve thoracic, and five lumbar vertebrae in the vertebral column.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 407, topic: "OSTEOLOGY", type: "true-false", question: "Lordosis affects the thoracic vertebrae.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 408, topic: "OSTEOLOGY", type: "true-false", question: "All vertebrae possess a body, a spine, and transverse foramina.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 409, topic: "OSTEOLOGY", type: "true-false", question: "The dens articulates with the axis.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 410, topic: "OSTEOLOGY", type: "true-false", question: "The ischium articulates with both the ilium and the pubis.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 411, topic: "OSTEOLOGY", type: "true-false", question: "The talus is the heel bone.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 412, topic: "OSTEOLOGY", type: "true-false", question: "The fibula is not a weight bearing bone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 413, topic: "OSTEOLOGY", type: "true-false", question: "The largest foramen in the body is the obturator foramen.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 414, topic: "OSTEOLOGY", type: "true-false", question: "The smallest short bone in the hand is the pisiform.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 415, topic: "OSTEOLOGY", type: "true-false", question: "The styloid process of the radius points to the thumb.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 416, topic: "OSTEOLOGY", type: "true-false", question: "The femur, tibia, fibula, talus are weight-bearing bones.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 417, topic: "OSTEOLOGY", type: "true-false", question: "The large fossa on the anterior aspect of the scapula is the subscapular fossa.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 418, topic: "OSTEOLOGY", type: "true-false", question: "Only the lumbar vertebrae have transverse foramina.", options: ["True", "False"], correctAnswerIndex: 1, explanation: "" },
+{ id: 419, topic: "OSTEOLOGY", type: "true-false", question: "The vomer is the primary bone in the septum of the nose.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 420, topic: "OSTEOLOGY", type: "true-false", question: "The 'cheekbone' is mostly formed from the zygomatic bone.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 421, topic: "OSTEOLOGY", type: "true-false", question: "The vertebra prominens is a spinous process that is visible through the skin.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 422, topic: "OSTEOLOGY", type: "true-false", question: "The vertebra prominens can be used as a landmark for counting the vertebrae.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 423, topic: "OSTEOLOGY", type: "true-false", question: "The lumbar curvature positions the weight of the trunk over the body's centre of gravity.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 424, topic: "OSTEOLOGY", type: "true-false", question: "Scoliosis is the most serious vertebral curvature abnormality, due to the pressure that can be placed on the lungs and resulting breathing difficulties.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 425, topic: "OSTEOLOGY", type: "true-false", question: "The area just distal to the tubercles of the humerus is called the surgical neck.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 426, topic: "OSTEOLOGY", type: "true-false", question: "The lower limbs carry the weight of the body and are subject to exceptional forces.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 427, topic: "OSTEOLOGY", type: "true-false", question: "The lower limb bones are thicker and stronger whereas the upper limb bones are adapted for flexibility and mobility and are therefore smaller and lighter.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 428, topic: "OSTEOLOGY", type: "true-false", question: "The pectoral girdle moves freely across the thorax and allows the upper limb a high degree of mobility.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 429, topic: "OSTEOLOGY", type: "true-false", question: "Male bones are heavier with prominent bone markings.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+{ id: 430, topic: "OSTEOLOGY", type: "true-false", question: "The pelvic girdle is secured to the axial skeleton to provide strength and support.", options: ["True", "False"], correctAnswerIndex: 0, explanation: "" },
+// VERTEBRAL REGIONS MATCHING
+{ id: 431, topic: "OSTEOLOGY", type: "matching", question: "Has transverse foramina", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccygeal"], correctAnswerIndex: 0, explanation: "" },
+{ id: 432, topic: "OSTEOLOGY", type: "matching", question: "Has demifacets for rib articulation", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccygeal"], correctAnswerIndex: 1, explanation: "" },
+{ id: 433, topic: "OSTEOLOGY", type: "matching", question: "Has the largest vertebral body", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccygeal"], correctAnswerIndex: 2, explanation: "" },
+{ id: 434, topic: "OSTEOLOGY", type: "matching", question: "Fused vertebrae forming part of the pelvis", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccygeal"], correctAnswerIndex: 3, explanation: "" },
+{ id: 435, topic: "OSTEOLOGY", type: "matching", question: "Tailbone", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccygeal"], correctAnswerIndex: 4, explanation: "" },
+{ id: 436, topic: "OSTEOLOGY", type: "matching", question: "Has a bifid spinous process", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccygeal"], correctAnswerIndex: 0, explanation: "" },
+{ id: 437, topic: "OSTEOLOGY", type: "matching", question: "Has a long downward-pointing spinous process", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccygeal"], correctAnswerIndex: 1, explanation: "" },
+{ id: 438, topic: "OSTEOLOGY", type: "matching", question: "Has a short blunt spinous process", options: ["Cervical", "Thoracic", "Lumbar", "Sacral", "Coccygeal"], correctAnswerIndex: 2, explanation: "" },
+
+// BONE SURFACE FEATURES - ADDITIONAL
+{ id: 439, topic: "OSTEOLOGY", type: "matching", question: "Large rounded projection for muscle attachment", options: ["Tuberosity", "Tubercle", "Crest", "Line", "Spine"], correctAnswerIndex: 0, explanation: "" },
+{ id: 440, topic: "OSTEOLOGY", type: "matching", question: "Small rounded projection for muscle attachment", options: ["Tuberosity", "Tubercle", "Crest", "Line", "Spine"], correctAnswerIndex: 1, explanation: "" },
+{ id: 441, topic: "OSTEOLOGY", type: "matching", question: "Prominent ridge or border", options: ["Tuberosity", "Tubercle", "Crest", "Line", "Spine"], correctAnswerIndex: 2, explanation: "" },
+{ id: 442, topic: "OSTEOLOGY", type: "matching", question: "Low ridge", options: ["Tuberosity", "Tubercle", "Crest", "Line", "Spine"], correctAnswerIndex: 3, explanation: "" },
+{ id: 443, topic: "OSTEOLOGY", type: "matching", question: "Sharp pointed process", options: ["Tuberosity", "Tubercle", "Crest", "Line", "Spine"], correctAnswerIndex: 4, explanation: "" },
+{ id: 444, topic: "OSTEOLOGY", type: "matching", question: "Large blunt process found only on femur", options: ["Trochanter", "Condyle", "Epicondyle", "Head", "Neck"], correctAnswerIndex: 0, explanation: "" },
+{ id: 445, topic: "OSTEOLOGY", type: "matching", question: "Rounded articular surface", options: ["Trochanter", "Condyle", "Epicondyle", "Head", "Neck"], correctAnswerIndex: 3, explanation: "" },
+{ id: 446, topic: "OSTEOLOGY", type: "matching", question: "Narrow connection between head and body", options: ["Trochanter", "Condyle", "Epicondyle", "Head", "Neck"], correctAnswerIndex: 4, explanation: "" },
+{ id: 447, topic: "OSTEOLOGY", type: "matching", question: "Rounded knuckle-like articular surface", options: ["Trochanter", "Condyle", "Epicondyle", "Head", "Neck"], correctAnswerIndex: 1, explanation: "" },
+{ id: 448, topic: "OSTEOLOGY", type: "matching", question: "Raised area above a condyle", options: ["Trochanter", "Condyle", "Epicondyle", "Head", "Neck"], correctAnswerIndex: 2, explanation: "" },
+{ id: 449, topic: "OSTEOLOGY", type: "matching", question: "Opening through a bone", options: ["Foramen", "Canal", "Fissure", "Meatus", "Sinus"], correctAnswerIndex: 0, explanation: "" },
+{ id: 450, topic: "OSTEOLOGY", type: "matching", question: "Tunnel-like passageway", options: ["Foramen", "Canal", "Fissure", "Meatus", "Sinus"], correctAnswerIndex: 1, explanation: "" },
+{ id: 451, topic: "OSTEOLOGY", type: "matching", question: "Narrow slit-like opening", options: ["Foramen", "Canal", "Fissure", "Meatus", "Sinus"], correctAnswerIndex: 2, explanation: "" },
+{ id: 452, topic: "OSTEOLOGY", type: "matching", question: "Canal-like passageway into a bone", options: ["Foramen", "Canal", "Fissure", "Meatus", "Sinus"], correctAnswerIndex: 3, explanation: "" },
+{ id: 453, topic: "OSTEOLOGY", type: "matching", question: "Air-filled cavity within a bone", options: ["Foramen", "Canal", "Fissure", "Meatus", "Sinus"], correctAnswerIndex: 4, explanation: "" },
+
+// CARPAL BONES MATCHING
+{ id: 454, topic: "OSTEOLOGY", type: "matching", question: "The most commonly fractured carpal bone", options: ["Scaphoid", "Lunate", "Triquetrum", "Pisiform", "Hamate"], correctAnswerIndex: 0, explanation: "" },
+{ id: 455, topic: "OSTEOLOGY", type: "matching", question: "The smallest carpal bone", options: ["Scaphoid", "Lunate", "Triquetrum", "Pisiform", "Hamate"], correctAnswerIndex: 3, explanation: "" },
+{ id: 456, topic: "OSTEOLOGY", type: "matching", question: "The carpal bone with a hook", options: ["Scaphoid", "Lunate", "Triquetrum", "Pisiform", "Hamate"], correctAnswerIndex: 4, explanation: "" },
+{ id: 457, topic: "OSTEOLOGY", type: "matching", question: "Articulates with the radius to form the wrist joint", options: ["Scaphoid and lunate", "Lunate and triquetrum", "Triquetrum and pisiform", "Scaphoid and trapezium", "Lunate and hamate"], correctAnswerIndex: 0, explanation: "" },
+{ id: 458, topic: "OSTEOLOGY", type: "matching", question: "The boat-shaped carpal bone", options: ["Scaphoid", "Lunate", "Triquetrum", "Pisiform", "Hamate"], correctAnswerIndex: 0, explanation: "" },
+
+// TARSAL BONES MATCHING
+{ id: 459, topic: "OSTEOLOGY", type: "matching", question: "The heel bone", options: ["Calcaneus", "Talus", "Navicular", "Cuboid", "Cuneiform"], correctAnswerIndex: 0, explanation: "" },
+{ id: 460, topic: "OSTEOLOGY", type: "matching", question: "The bone that articulates with the tibia and fibula", options: ["Calcaneus", "Talus", "Navicular", "Cuboid", "Cuneiform"], correctAnswerIndex: 1, explanation: "" },
+{ id: 461, topic: "OSTEOLOGY", type: "matching", question: "The keystone of the medial longitudinal arch", options: ["Calcaneus", "Talus", "Navicular", "Cuboid", "Cuneiform"], correctAnswerIndex: 2, explanation: "" },
+{ id: 462, topic: "OSTEOLOGY", type: "matching", question: "The cube-shaped tarsal bone on the lateral side", options: ["Calcaneus", "Talus", "Navicular", "Cuboid", "Cuneiform"], correctAnswerIndex: 3, explanation: "" },
+{ id: 463, topic: "OSTEOLOGY", type: "matching", question: "The three wedge-shaped tarsal bones", options: ["Calcaneus", "Talus", "Navicular", "Cuboid", "Cuneiform"], correctAnswerIndex: 4, explanation: "" },
+
+// SKULL FEATURES MATCHING
+{ id: 464, topic: "OSTEOLOGY", type: "matching", question: "Forms the anterior cranial fossa", options: ["Frontal bone", "Ethmoid bone", "Sphenoid bone", "Temporal bone", "Occipital bone"], correctAnswerIndex: 0, explanation: "" },
+{ id: 465, topic: "OSTEOLOGY", type: "matching", question: "Forms the middle cranial fossa", options: ["Frontal bone", "Ethmoid bone", "Sphenoid bone", "Temporal bone", "Occipital bone"], correctAnswerIndex: 2, explanation: "" },
+{ id: 466, topic: "OSTEOLOGY", type: "matching", question: "Forms the posterior cranial fossa", options: ["Frontal bone", "Ethmoid bone", "Sphenoid bone", "Temporal bone", "Occipital bone"], correctAnswerIndex: 4, explanation: "" },
+{ id: 467, topic: "OSTEOLOGY", type: "matching", question: "Contains the cribriform plate", options: ["Frontal bone", "Ethmoid bone", "Sphenoid bone", "Temporal bone", "Occipital bone"], correctAnswerIndex: 1, explanation: "" },
+{ id: 468, topic: "OSTEOLOGY", type: "matching", question: "Contains the petrous part", options: ["Frontal bone", "Ethmoid bone", "Sphenoid bone", "Temporal bone", "Occipital bone"], correctAnswerIndex: 3, explanation: "" },
+
+// JOINTS CLASSIFICATION
+{ id: 469, topic: "JOINTS", type: "matching", question: "Joint between skull bones", options: ["Fibrous", "Cartilaginous", "Synovial", "Amphiarthrosis", "Diarthrosis"], correctAnswerIndex: 0, explanation: "" },
+{ id: 470, topic: "JOINTS", type: "matching", question: "Joint between vertebrae (intervertebral discs)", options: ["Fibrous", "Cartilaginous", "Synovial", "Amphiarthrosis", "Diarthrosis"], correctAnswerIndex: 1, explanation: "" },
+{ id: 471, topic: "JOINTS", type: "matching", question: "Joint at the knee", options: ["Fibrous", "Cartilaginous", "Synovial", "Amphiarthrosis", "Diarthrosis"], correctAnswerIndex: 2, explanation: "" },
+{ id: 472, topic: "JOINTS", type: "matching", question: "Slightly movable joint", options: ["Fibrous", "Cartilaginous", "Synovial", "Amphiarthrosis", "Diarthrosis"], correctAnswerIndex: 3, explanation: "" },
+{ id: 473, topic: "JOINTS", type: "matching", question: "Freely movable joint", options: ["Fibrous", "Cartilaginous", "Synovial", "Amphiarthrosis", "Diarthrosis"], correctAnswerIndex: 4, explanation: "" },
+{ id: 474, topic: "JOINTS", type: "matching", question: "Immovable joint", options: ["Fibrous", "Cartilaginous", "Synovial", "Amphiarthrosis", "Diarthrosis"], correctAnswerIndex: 0, explanation: "" },
+{ id: 475, topic: "JOINTS", type: "matching", question: "Pubic symphysis is an example", options: ["Fibrous", "Cartilaginous", "Synovial", "Amphiarthrosis", "Diarthrosis"], correctAnswerIndex: 1, explanation: "" },
+{ id: 476, topic: "JOINTS", type: "matching", question: "Shoulder joint is an example", options: ["Fibrous", "Cartilaginous", "Synovial", "Amphiarthrosis", "Diarthrosis"], correctAnswerIndex: 4, explanation: "" },
+
+// SYNOVIAL JOINT TYPES
+{ id: 477, topic: "JOINTS", type: "matching", question: "Elbow joint type", options: ["Hinge", "Pivot", "Ball and socket", "Condyloid", "Saddle"], correctAnswerIndex: 0, explanation: "" },
+{ id: 478, topic: "JOINTS", type: "matching", question: "Atlantoaxial joint type", options: ["Hinge", "Pivot", "Ball and socket", "Condyloid", "Saddle"], correctAnswerIndex: 1, explanation: "" },
+{ id: 479, topic: "JOINTS", type: "matching", question: "Shoulder joint type", options: ["Hinge", "Pivot", "Ball and socket", "Condyloid", "Saddle"], correctAnswerIndex: 2, explanation: "" },
+{ id: 480, topic: "JOINTS", type: "matching", question: "Metacarpophalangeal joint type", options: ["Hinge", "Pivot", "Ball and socket", "Condyloid", "Saddle"], correctAnswerIndex: 3, explanation: "" },
+{ id: 481, topic: "JOINTS", type: "matching", question: "Carpometacarpal joint of thumb type", options: ["Hinge", "Pivot", "Ball and socket", "Condyloid", "Saddle"], correctAnswerIndex: 4, explanation: "" },
+{ id: 482, topic: "JOINTS", type: "matching", question: "Interphalangeal joint type", options: ["Hinge", "Pivot", "Ball and socket", "Condyloid", "Saddle"], correctAnswerIndex: 0, explanation: "" },
+{ id: 483, topic: "JOINTS", type: "matching", question: "Hip joint type", options: ["Hinge", "Pivot", "Ball and socket", "Condyloid", "Saddle"], correctAnswerIndex: 2, explanation: "" },
+{ id: 484, topic: "JOINTS", type: "matching", question: "Radioulnar joint type", options: ["Hinge", "Pivot", "Ball and socket", "Condyloid", "Saddle"], correctAnswerIndex: 1, explanation: "" },
+
+// Lower Limb Matching
+{ id: 485, topic: "OSTEOLOGY", type: "matching", question: "Weight-bearing bone of the leg", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 1, explanation: "" },
+{ id: 486, topic: "OSTEOLOGY", type: "matching", question: "Largest tarsal bone", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 2, explanation: "" },
+{ id: 487, topic: "OSTEOLOGY", type: "matching", question: "Tarsal bone that sits on the calcaneus", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 0, explanation: "" },
+{ id: 488, topic: "OSTEOLOGY", type: "matching", question: "Tarsal bone that articulates with the tibia", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 0, explanation: "" },
+{ id: 489, topic: "OSTEOLOGY", type: "matching", question: "Lateral ankle projection", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 3, explanation: "" },
+{ id: 490, topic: "OSTEOLOGY", type: "matching", question: "Bone which articulates with the femur and fibula", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 1, explanation: "" },
+{ id: 491, topic: "OSTEOLOGY", type: "matching", question: "Heavy medial leg bone", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 1, explanation: "" },
+{ id: 492, topic: "OSTEOLOGY", type: "matching", question: "Bone forming knee joint", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 1, explanation: "" },
+{ id: 493, topic: "OSTEOLOGY", type: "matching", question: "Bone with point for the attachment of the patellar ligaments", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 1, explanation: "" },
+{ id: 494, topic: "OSTEOLOGY", type: "matching", question: "Has a medial ankle projection", options: ["Talus", "Tibia", "Calcaneus", "Lateral malleolus", "Navicular"], correctAnswerIndex: 2, explanation: "" },
+
+// Girdle Bones
+{ id: 495, topic: "OSTEOLOGY", type: "matching", question: "Bone of the axial skeleton to which the pectoral girdle attaches", options: ["Scapula", "Ilium", "Clavicle", "Sternum", "Ischium"], correctAnswerIndex: 2, explanation: "" },
+{ id: 496, topic: "OSTEOLOGY", type: "matching", question: "Markings include glenoid cavity and acromion", options: ["Scapula", "Ilium", "Clavicle", "Sternum", "Ischium"], correctAnswerIndex: 0, explanation: "" },
+{ id: 497, topic: "OSTEOLOGY", type: "matching", question: "Features include ala, crest and greater sciatic notch", options: ["Scapula", "Ilium", "Clavicle", "Sternum", "Ischium"], correctAnswerIndex: 1, explanation: "" },
+{ id: 498, topic: "OSTEOLOGY", type: "matching", question: "Doubly curved; acts as shoulder strut", options: ["Scapula", "Ilium", "Clavicle", "Sternum", "Ischium"], correctAnswerIndex: 2, explanation: "" },
+{ id: 499, topic: "OSTEOLOGY", type: "matching", question: "Pelvic girdle bone that articulates with the axial skeleton", options: ["Scapula", "Ilium", "Clavicle", "Sternum", "Ischium"], correctAnswerIndex: 1, explanation: "" },
+{ id: 500, topic: "OSTEOLOGY", type: "matching", question: "The sit-down bone", options: ["Scapula", "Ilium", "Clavicle", "Sternum", "Ischium"], correctAnswerIndex: 4, explanation: "" },
+
+// Upper Limb
+{ id: 501, topic: "OSTEOLOGY", type: "matching", question: "Bone that carries the hand", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 1, explanation: "" },
+{ id: 502, topic: "OSTEOLOGY", type: "matching", question: "Is the largest, longest bone of the upper limb", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 0, explanation: "" },
+{ id: 503, topic: "OSTEOLOGY", type: "matching", question: "Its distal end articulates with the radius and ulna", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 0, explanation: "" },
+{ id: 504, topic: "OSTEOLOGY", type: "matching", question: "Is the longer and more medial bone of the forearm", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 1, explanation: "" },
+{ id: 505, topic: "OSTEOLOGY", type: "matching", question: "Part of it forms the heel of the foot", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 2, explanation: "" },
+{ id: 506, topic: "OSTEOLOGY", type: "matching", question: "This bone is thin at its proximal end and widens distally", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 1, explanation: "" },
+{ id: 507, topic: "OSTEOLOGY", type: "matching", question: "Its head is shaped like the head of a nail", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 1, explanation: "" },
+{ id: 508, topic: "OSTEOLOGY", type: "matching", question: "It transmits weight to the foot", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 3, explanation: "" },
+{ id: 509, topic: "OSTEOLOGY", type: "matching", question: "Is made up of seven bones", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 2, explanation: "" },
+{ id: 510, topic: "OSTEOLOGY", type: "matching", question: "Is the major forearm bone contributing to the wrist joint", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 1, explanation: "" },
+{ id: 511, topic: "OSTEOLOGY", type: "matching", question: "It contributes more heavily to the elbow joint", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 0, explanation: "" },
+{ id: 512, topic: "OSTEOLOGY", type: "matching", question: "Its distal end bears a head and a styloid process", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 4, explanation: "" },
+{ id: 513, topic: "OSTEOLOGY", type: "matching", question: "This bone grips the humerus to form a stable hinge joint", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 4, explanation: "" },
+{ id: 514, topic: "OSTEOLOGY", type: "matching", question: "From its styloid process a ligament extends to the wrist", options: ["Humerus", "Radius", "Tarsals", "Tibia", "Ulna"], correctAnswerIndex: 4, explanation: "" },
+
+// Various Bones
+{ id: 515, topic: "OSTEOLOGY", type: "matching", question: "Anteriormost bone of the pelvic girdle", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 1, explanation: "" },
+{ id: 516, topic: "OSTEOLOGY", type: "matching", question: "Part of the vertebral column", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 0, explanation: "" },
+{ id: 517, topic: "OSTEOLOGY", type: "matching", question: "Articulates with the acetabulum and tibia", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 3, explanation: "" },
+{ id: 518, topic: "OSTEOLOGY", type: "matching", question: "It consists of 2 rows of bones", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 2, explanation: "" },
+{ id: 519, topic: "OSTEOLOGY", type: "matching", question: "Forms the lateral aspect of the ankle", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 4, explanation: "" },
+{ id: 520, topic: "OSTEOLOGY", type: "matching", question: "The wrist bones", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 2, explanation: "" },
+{ id: 521, topic: "OSTEOLOGY", type: "matching", question: "Triangular bone which shapes the posterior wall of the pelvis", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 0, explanation: "" },
+{ id: 522, topic: "OSTEOLOGY", type: "matching", question: "The bone that strengthens and stabilizes the pelvis", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 0, explanation: "" },
+{ id: 523, topic: "OSTEOLOGY", type: "matching", question: "It is formed by five fused vertebrae in the adult", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 0, explanation: "" },
+{ id: 524, topic: "OSTEOLOGY", type: "matching", question: "Its inferior end has an enlarged external opening", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 1, explanation: "" },
+{ id: 525, topic: "OSTEOLOGY", type: "matching", question: "The bodies of these bones are joined by a fibrocartilage disc", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 0, explanation: "" },
+{ id: 526, topic: "OSTEOLOGY", type: "matching", question: "Is the largest, strongest and longest bone in the body", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 3, explanation: "" },
+{ id: 527, topic: "OSTEOLOGY", type: "matching", question: "It does not bear weight but several muscles originate from it", options: ["Sacrum", "Pubis", "Carpals", "Femur", "Fibula"], correctAnswerIndex: 4, explanation: "" },
+    ];
+
+    console.log("Loaded", masterQuestions.length, "Anatomy questions");
+
+    // ========== APP STATE ==========
+    let currentQuestionsList = [];
+    let currentQIndex = 0;
+    let currentMarkingMode = null;
+    let userAnswers = {};
+    let timerIntervalId = null;
+    let timeLeft = 300;
+    let timerActive = false;
+    let lastQuizState = null;
+    let originalMarkingMode = null;
+    let selectedTopics = ["ALL TOPICS"];
+    let showOnlyIncorrect = false;
+
+    const timerSlider = document.getElementById('timerSlider');
+    const timerValueDisplay = document.getElementById('timerValueDisplay');
+    const timerToggle = document.getElementById('timerToggle');
+
+    function updateTimerDisplay(value) {
+        if (value < 60) {
+            timerValueDisplay.innerText = `${value} minutes`;
+        } else {
+            let hours = Math.floor(value / 60);
+            let minutes = value % 60;
+            if (minutes === 0) {
+                timerValueDisplay.innerText = `${hours} hour${hours > 1 ? 's' : ''}`;
+            } else {
+                timerValueDisplay.innerText = `${hours} hr ${minutes} min`;
+            }
+        }
+    }
+
+    if (timerToggle) {
+        timerToggle.addEventListener('change', function() {
+            timerSlider.disabled = !this.checked;
+            if (!this.checked && timerIntervalId) {
+                clearInterval(timerIntervalId);
+                document.getElementById('timerText').innerText = '∞';
+                timerActive = false;
+            }
+        });
+    }
+
+    if (timerSlider) {
+        timerSlider.addEventListener('input', function() {
+            let val = parseInt(this.value);
+            updateTimerDisplay(val);
+            if (timerToggle && timerToggle.checked) {
+                if (timerIntervalId) clearInterval(timerIntervalId);
+                timerActive = true;
+                timeLeft = val * 60;
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                document.getElementById('timerText').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                startTimer();
+            }
+        });
+        updateTimerDisplay(parseInt(timerSlider.value));
+        timerSlider.disabled = true;
+    }
+
+    function filterQuestions() {
+        let filtered = [...masterQuestions];
+        const mcq = document.getElementById('filterMCQ')?.checked ?? true;
+        const tf = document.getElementById('filterTrueFalse')?.checked ?? true;
+        const matching = document.getElementById('filterMatching')?.checked ?? true;
+        
+        filtered = filtered.filter(q => {
+            if (q.type === 'mcq' && mcq) return true;
+            if (q.type === 'true-false' && tf) return true;
+            if (q.type === 'matching' && matching) return true;
+            return false;
+        });
+        
+        const kw = document.getElementById('keywordFilter')?.value.toLowerCase().trim() || '';
+        if (kw) filtered = filtered.filter(q => q.question.toLowerCase().includes(kw));
+        
+        if (selectedTopics && selectedTopics.length > 0 && !selectedTopics.includes("ALL TOPICS")) {
+            filtered = filtered.filter(q => {
+                if (Array.isArray(q.topic)) {
+                    return q.topic.some(t => selectedTopics.includes(t));
+                }
+                return selectedTopics.includes(q.topic);
+            });
+        }
+        
+        if (document.getElementById('shuffleToggle')?.checked) {
+            for (let i = filtered.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+            }
+        }
+        return filtered;
+    }
+
+    function startTopicSelection() {
+        const container = document.getElementById('topicListContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        
+        masterTopicsList.forEach(topic => {
+            const card = document.createElement('div');
+            card.className = 'mode-card';
+            card.setAttribute('data-topic', topic);
+            card.innerHTML = `<h3>${topic === "ALL TOPICS" ? "📚 " : "📁 "}${topic}</h3><p>${topic === "ALL TOPICS" ? "All questions mixed" : `Questions from ${topic}`}</p>`;
+            
+            if (selectedTopics.includes(topic)) {
+                card.style.borderColor = 'var(--primary)';
+                card.style.boxShadow = '0 0 0 2px var(--primary), 0 4px 12px rgba(0,0,0,0.1)';
+                card.style.transform = 'translateY(-3px)';
+            }
+            
+            card.onclick = () => {
+                if (selectedTopics.includes(topic)) {
+                    selectedTopics = selectedTopics.filter(t => t !== topic);
+                    card.style.borderColor = 'var(--border)';
+                    card.style.boxShadow = 'none';
+                    card.style.transform = 'translateY(0)';
+                } else {
+                    selectedTopics.push(topic);
+                    card.style.borderColor = 'var(--primary)';
+                    card.style.boxShadow = '0 0 0 2px var(--primary), 0 4px 12px rgba(0,0,0,0.1)';
+                    card.style.transform = 'translateY(-3px)';
+                }
+            };
+            container.appendChild(card);
+        });
+        
+        document.getElementById('homePage').classList.add('hidden');
+        document.getElementById('topicPage').classList.remove('hidden');
+        document.getElementById('modeSelection').classList.add('hidden');
+        document.getElementById('quizPage').classList.add('hidden');
+        document.getElementById('resultsPage').classList.add('hidden');
+    }
+
+    function backToTopic() {
+        document.getElementById('modeSelection').classList.add('hidden');
+        document.getElementById('topicPage').classList.remove('hidden');
+    }
+
+    function proceedToModeSelection() {
+        if (selectedTopics.length === 0) {
+            alert("⚠️ Please select at least one topic.");
+            return;
+        }
+        document.getElementById('topicPage').classList.add('hidden');
+        document.getElementById('modeSelection').classList.remove('hidden');
+    }
+
+    function confirmStartQuiz(mode) {
+        currentMarkingMode = mode;
+        originalMarkingMode = mode;
+        const filtered = filterQuestions();
+        if (filtered.length === 0) { alert("No questions match your filters."); return; }
+        currentQuestionsList = filtered;
+        userAnswers = {};
+        currentQIndex = 0;
+        
+        timerActive = (timerToggle && timerToggle.checked);
+        if (timerActive && timerSlider && parseInt(timerSlider.value) > 0) {
+            startTimer();
+        } else {
+            if (timerIntervalId) clearInterval(timerIntervalId);
+            document.getElementById('timerText').innerText = '∞';
+            timerActive = false;
+        }
+        
+        document.getElementById('modeBadge').innerText = mode === 'mark-as-you-go' ? '✓ Mark As You Go' : '📋 Submit All';
+        document.getElementById('totalQNum').innerText = currentQuestionsList.length;
+        document.getElementById('quizTitle').innerText = 'Anatomy Quiz';
+        displayQuestion();
+        document.getElementById('modeSelection').classList.add('hidden');
+        document.getElementById('quizPage').classList.remove('hidden');
+    }
+
+    function startTimer() {
+        if (timerIntervalId) clearInterval(timerIntervalId);
+        let duration = (timerSlider && timerActive) ? parseInt(timerSlider.value) * 60 : 300;
+        timeLeft = duration;
+        updateTimerDisplaySimple();
+        timerIntervalId = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimerDisplaySimple();
+                if (timeLeft <= 60) {
+                    document.getElementById('timerDisplay').style.background = 'rgba(255,68,68,0.2)';
+                }
+            } else {
+                clearInterval(timerIntervalId);
+                submitAllAnswers();
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplaySimple() {
+        let m = Math.floor(timeLeft / 60);
+        let s = timeLeft % 60;
+        document.getElementById('timerText').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function displayQuestion() {
+        updateQuestionGrid();
+        if (!currentQuestionsList.length || currentQIndex >= currentQuestionsList.length) return;
+        let q = currentQuestionsList[currentQIndex];
+        document.getElementById('currentQNum').innerText = currentQIndex + 1;
+        document.getElementById('totalQNum').innerText = currentQuestionsList.length;
+        document.getElementById('progressFill').style.width = ((currentQIndex + 1) / currentQuestionsList.length * 100) + '%';
+        document.getElementById('questionText').innerHTML = `${currentQIndex + 1}. ${q.question}`;
+        
+        let optsHtml = q.options.map((opt, idx) => {
+            let isSelected = userAnswers[currentQIndex]?.selectedIndex === idx;
+            return `<div class="option ${isSelected ? 'selected' : ''}" onclick="selectAnswer(${idx})">
+                        <span class="option-letter">${String.fromCharCode(65 + idx)}</span>
+                        <span>${escapeHtml(opt)}</span>
+                    </div>`;
+        }).join('');
+        document.getElementById('optionsContainer').innerHTML = optsHtml;
+        document.getElementById('prevBtn').disabled = currentQIndex === 0;
+        document.getElementById('nextBtn').innerText = currentQIndex === currentQuestionsList.length - 1 ? "SUBMIT" : "NEXT →";
+        
+        if (currentMarkingMode === 'mark-as-you-go' && userAnswers[currentQIndex]) {
+            showFeedback();
+        } else {
+            document.getElementById('feedbackDiv').innerHTML = '';
+        }
+    }
+
+    window.selectAnswer = function(idx) {
+        let q = currentQuestionsList[currentQIndex];
+        if (currentMarkingMode === 'mark-as-you-go' && userAnswers[currentQIndex]) return;
+        
+        userAnswers[currentQIndex] = { selectedIndex: idx };
+        
+        if (currentMarkingMode === 'mark-as-you-go') {
+            userAnswers[currentQIndex].isCorrect = (idx === q.correctAnswerIndex);
+            displayQuestion();
+            showFeedback();
+            let opts = document.querySelectorAll('.option');
+            opts.forEach((opt, i) => {
+                if (i === q.correctAnswerIndex) opt.classList.add('correct');
+                if (i === idx && idx !== q.correctAnswerIndex) opt.classList.add('incorrect');
+            });
+        } else {
+            displayQuestion();
+        }
+        saveProgress();
+    };
+
+    function showFeedback() {
+        let a = userAnswers[currentQIndex];
+        if (!a) return;
+        let q = currentQuestionsList[currentQIndex];
+        let isCorrect = (a.selectedIndex === q.correctAnswerIndex);
+        document.getElementById('feedbackDiv').innerHTML = `
+            <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                <strong>${isCorrect ? '✓ CORRECT!' : '✗ INCORRECT'}</strong>
+            </div>`;
+    }
+
+    window.nextQuestion = function() {
+        if (currentQIndex === currentQuestionsList.length - 1) {
+            if (currentMarkingMode === 'submit-all') {
+                let unanswered = [];
+                for (let i = 0; i < currentQuestionsList.length; i++) {
+                    if (!userAnswers[i]) unanswered.push(i + 1);
+                }
+                if (unanswered.length > 0) {
+                    let message = `⚠️ You have ${unanswered.length} unanswered question(s): ${unanswered.join(', ')}.\n\nSubmit anyway?`;
+                    if (!confirm(message)) {
+                        for (let i = 0; i < currentQuestionsList.length; i++) {
+                            if (!userAnswers[i]) {
+                                currentQIndex = i;
+                                displayQuestion();
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+            submitAllAnswers();
+        } else {
+            currentQIndex++;
+            displayQuestion();
+            saveProgress();
+        }
+    };
+
+    window.previousQuestion = function() {
+        if (currentQIndex > 0) {
+            currentQIndex--;
+            displayQuestion();
+            saveProgress();
+        }
+    };
+
+    function submitAllAnswers() {
+        clearSavedProgress();
+        if (timerIntervalId) clearInterval(timerIntervalId);
+        let correct = 0;
+        for (let i = 0; i < currentQuestionsList.length; i++) {
+            let answer = userAnswers[i];
+            if (answer && answer.selectedIndex === currentQuestionsList[i].correctAnswerIndex) {
+                correct++;
+            }
+        }
+        let pct = Math.round((correct / currentQuestionsList.length) * 100);
+        showResults(correct, currentQuestionsList.length, pct);
+    }
+
+    function showResults(correct, total, pct) {
+        document.getElementById('scorePercentage').innerText = pct + '%';
+        
+        let msg = "";
+        if (pct === 100) msg = "🏆 PERFECT SCORE! Absolute dominance!";
+        else if (pct >= 90) msg = "🔥 EXCELLENT! You're an anatomy master!";
+        else if (pct >= 80) msg = "💪 GREAT! Keep that energy up!";
+        else if (pct >= 70) msg = "👍 GOOD! Solid foundation here!";
+        else if (pct >= 60) msg = "📚 SOLID! Review a bit and you'll crush it!";
+        else msg = "🎯 KEEP GOING! Every mistake is a lesson. You've got this!";
+        document.getElementById('performanceMsg').innerHTML = msg;
+        
+        lastQuizState = {
+            questions: [...currentQuestionsList],
+            answers: JSON.parse(JSON.stringify(userAnswers))
+        };
+        
+        let topicDisplay = (selectedTopics.includes("ALL TOPICS") || selectedTopics.length === 0) ? "All Topics Mixed" : selectedTopics.join(", ");
+        saveQuizToHistory(correct, total, pct, topicDisplay);
+        
+        buildReviewList();
+        
+        document.getElementById('quizPage').classList.add('hidden');
+        document.getElementById('resultsPage').classList.remove('hidden');
+        switchResultsTab('summary');
+    }
+
+    function buildReviewList() {
+        if (!lastQuizState) return;
+        const container = document.getElementById('reviewList');
+        if (!container) return;
+        
+        let html = '';
+        for (let i = 0; i < lastQuizState.questions.length; i++) {
+            let q = lastQuizState.questions[i];
+            let answer = lastQuizState.answers[i];
+            let isCorrect = answer && (answer.selectedIndex === q.correctAnswerIndex);
+            let userLetter = answer ? String.fromCharCode(65 + answer.selectedIndex) : 'Not answered';
+            let correctLetter = String.fromCharCode(65 + q.correctAnswerIndex);
+            let userText = answer ? q.options[answer.selectedIndex] : 'Not answered';
+            let correctText = q.options[q.correctAnswerIndex];
+            
+            if (showOnlyIncorrect && isCorrect) continue;
+            
+            html += `
+                <div class="review-card ${isCorrect ? 'correct' : 'incorrect'}">
+                    <div class="review-question">Q${i+1}. ${escapeHtml(q.question)}</div>
+                    <div class="review-answer">📌 <strong>Your answer:</strong> <span class="${isCorrect ? 'review-correct-answer' : 'review-your-answer'}">${userLetter}. ${escapeHtml(userText)}</span></div>
+                    <div class="review-answer">✅ <strong>Correct answer:</strong> <span class="review-correct-answer">${correctLetter}. ${escapeHtml(correctText)}</span></div>
+                </div>
+            `;
+        }
+        
+        if (showOnlyIncorrect && html === '') {
+            html = '<div style="text-align: center; padding: 40px;">🎉 Amazing! You got all questions correct!</div>';
+        }
+        container.innerHTML = html;
+    }
+
+    function toggleShowOnlyIncorrect() {
+        showOnlyIncorrect = !showOnlyIncorrect;
+        const btn = document.getElementById('filterIncorrectBtn');
+        if (btn) {
+            btn.innerText = showOnlyIncorrect ? '🔍 Show All Questions' : '🔍 Show Only Incorrect';
+        }
+        buildReviewList();
+    }
+
+    function switchResultsTab(tabName) {
+        const tabs = ['summary', 'review'];
+        tabs.forEach(t => {
+            const tabContent = document.getElementById(t + 'Tab');
+            if (tabContent) tabContent.classList.remove('active');
+            const tabBtn = document.querySelector(`.tab-btn[onclick="switchResultsTab('${t}')"]`);
+            if (tabBtn) tabBtn.classList.remove('active');
+        });
+        document.getElementById(tabName + 'Tab').classList.add('active');
+        const activeBtn = document.querySelector(`.tab-btn[onclick="switchResultsTab('${tabName}')"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+        
+        if (tabName === 'review') buildReviewList();
+    }
+
+    window.retakeSameMode = function() {
+        if (!lastQuizState || !lastQuizState.questions) {
+            alert("No quiz data available.");
+            return;
+        }
+        currentQuestionsList = [...lastQuizState.questions];
+        userAnswers = {};
+        currentQIndex = 0;
+        currentMarkingMode = originalMarkingMode;
+        
+        timerActive = (timerToggle && timerToggle.checked);
+        if (timerActive && timerSlider && parseInt(timerSlider.value) > 0) {
+            startTimer();
+        } else {
+            if (timerIntervalId) clearInterval(timerIntervalId);
+            document.getElementById('timerText').innerText = '∞';
+        }
+        
+        document.getElementById('modeBadge').innerText = currentMarkingMode === 'mark-as-you-go' ? '✓ Mark As You Go' : '📋 Submit All';
+        document.getElementById('totalQNum').innerText = currentQuestionsList.length;
+        document.getElementById('quizTitle').innerText = 'Anatomy Quiz';
+        document.getElementById('resultsPage').classList.add('hidden');
+        document.getElementById('quizPage').classList.remove('hidden');
+        displayQuestion();
+    };
+
+    window.reviewIncorrect = function() {
+        if (!lastQuizState || !lastQuizState.questions || !lastQuizState.answers) {
+            alert("No quiz data available. Please complete a quiz first.");
+            return;
+        }
+        
+        let wrongQuestions = [];
+        for (let i = 0; i < lastQuizState.questions.length; i++) {
+            let userAnswer = lastQuizState.answers[i];
+            let question = lastQuizState.questions[i];
+            let isCorrect = userAnswer && (userAnswer.selectedIndex === question.correctAnswerIndex);
+            if (!isCorrect) {
+                wrongQuestions.push(question);
+            }
+        }
+        
+        if (wrongQuestions.length === 0) {
+            alert("🎉 PERFECT! No incorrect answers to review. You got them all right!");
+            return;
+        }
+        
+        currentQuestionsList = wrongQuestions;
+        userAnswers = {};
+        currentQIndex = 0;
+        currentMarkingMode = originalMarkingMode;
+        
+        if (timerIntervalId) clearInterval(timerIntervalId);
+        document.getElementById('timerText').innerText = '∞';
+        document.getElementById('timerDisplay').style.opacity = '0.6';
+        document.getElementById('timerDisplay').style.background = 'rgba(100,100,100,0.2)';
+        
+        document.getElementById('modeBadge').innerText = '📝 REVIEW MODE (No Timer)';
+        document.getElementById('quizTitle').innerText = 'Review: Incorrect Questions';
+        document.getElementById('totalQNum').innerText = currentQuestionsList.length;
+        document.getElementById('resultsPage').classList.add('hidden');
+        document.getElementById('quizPage').classList.remove('hidden');
+        displayQuestion();
+    };
+
+    window.goHome = function() { 
+        clearSavedProgress();
+        if (timerIntervalId) clearInterval(timerIntervalId);
+        document.getElementById('homePage').classList.remove('hidden');
+        document.getElementById('topicPage').classList.add('hidden');
+        document.getElementById('modeSelection').classList.add('hidden');
+        document.getElementById('quizPage').classList.add('hidden');
+        document.getElementById('resultsPage').classList.add('hidden');
+        selectedTopics = ["ALL TOPICS"];
+        if (document.getElementById('keywordFilter')) document.getElementById('keywordFilter').value = '';
+    };
+
+    window.toggleSettingsPanel = function() {
+        document.getElementById('settingsPanel').classList.toggle('hidden');
+    };
+
+    document.addEventListener('keydown', (e) => {
+        if (document.getElementById('quizPage').classList.contains('hidden')) return;
+        let key = e.key.toLowerCase();
+        if (['a','b','c','d','e'].includes(key)) {
+            let idx = key.charCodeAt(0) - 97;
+            let opts = document.querySelectorAll('.option');
+            if (opts[idx] && !opts[idx].classList.contains('selected')) {
+                selectAnswer(idx);
+            }
+            e.preventDefault();
+        }
+        if (key === 'n') { nextQuestion(); e.preventDefault(); }
+        if (key === 'arrowleft') { previousQuestion(); e.preventDefault(); }
+    });
+
+    const themeBtn = document.createElement('button');
+    themeBtn.className = 'theme-toggle';
+    themeBtn.innerHTML = '🌙';
+    themeBtn.onclick = () => document.body.classList.toggle('dark-mode');
+    document.body.appendChild(themeBtn);
+
+    function updateQuestionGrid() {
+        const grid = document.getElementById('questionGrid');
+        if (!grid) return;
+        let html = '';
+        for (let i = 0; i < currentQuestionsList.length; i++) {
+            let isAnswered = userAnswers[i] !== undefined;
+            let isCurrent = (i === currentQIndex);
+            html += `<div class="question-dot ${isAnswered ? 'answered' : 'unanswered'} ${isCurrent ? 'current' : ''}" onclick="jumpToQuestion(${i})">${i + 1}</div>`;
+        }
+        grid.innerHTML = html;
+    }
+
+    function jumpToQuestion(index) {
+        currentQIndex = index;
+        displayQuestion();
+        toggleNavigator();
+    }
+
+    function toggleNavigator() {
+        const nav = document.getElementById('questionNavigator');
+        if (nav) {
+            if (nav.style.display === 'none' || nav.style.display === '') {
+                updateQuestionGrid();
+                nav.style.display = 'block';
+            } else {
+                nav.style.display = 'none';
+            }
+        }
+    }
+
+    function saveProgress() {
+        if (!currentQuestionsList.length || currentMarkingMode === null) return;
+        const progress = {
+            questions: currentQuestionsList,
+            answers: userAnswers,
+            currentIndex: currentQIndex,
+            markingMode: currentMarkingMode,
+            selectedTopics: selectedTopics,
+            timestamp: new Date().getTime()
+        };
+        localStorage.setItem('anatomyQuizProgress', JSON.stringify(progress));
+    }
+
+    function loadProgress() {
+        const saved = localStorage.getItem('anatomyQuizProgress');
+        if (!saved) return false;
+        const progress = JSON.parse(saved);
+        if (confirm(`📀 Resume your previous quiz?\n\nYou were on question ${progress.currentIndex + 1} of ${progress.questions.length}.\n\nClick OK to resume, Cancel to start fresh.`)) {
+            currentQuestionsList = progress.questions;
+            userAnswers = progress.answers;
+            currentQIndex = progress.currentIndex;
+            currentMarkingMode = progress.markingMode;
+            selectedTopics = progress.selectedTopics || ["ALL TOPICS"];
+            displayQuestion();
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('quizPage').classList.remove('hidden');
+            document.getElementById('modeBadge').innerText = currentMarkingMode === 'mark-as-you-go' ? '✓ Mark As You Go' : '📋 Submit All';
+            document.getElementById('totalQNum').innerText = currentQuestionsList.length;
+            if (timerToggle && timerToggle.checked && timerSlider && parseInt(timerSlider.value) > 0) {
+                startTimer();
+            } else {
+                document.getElementById('timerText').innerText = '∞';
+            }
+            return true;
+        } else {
+            localStorage.removeItem('anatomyQuizProgress');
+            return false;
+        }
+    }
+
+    function clearSavedProgress() {
+        localStorage.removeItem('anatomyQuizProgress');
+    }
+
+    function saveQuizToHistory(score, total, percentage, topic) {
+        const history = getQuizHistory();
+        const historyEntry = {
+            id: Date.now(),
+            date: new Date().toLocaleString(),
+            score: score,
+            total: total,
+            percentage: percentage,
+            topic: topic || "All Topics Mixed",
+            timestamp: Date.now()
+        };
+        history.unshift(historyEntry);
+        if (history.length > 20) history.pop();
+        localStorage.setItem('anatomyQuizHistory', JSON.stringify(history));
+        displayQuizHistory();
+    }
+
+    function getQuizHistory() {
+        const saved = localStorage.getItem('anatomyQuizHistory');
+        return saved ? JSON.parse(saved) : [];
+    }
+
+    function displayQuizHistory() {
+        const history = getQuizHistory();
+        const container = document.getElementById('historyList');
+        const emptyState = document.getElementById('historyEmptyState');
+        if (!container) return;
+        if (history.length === 0) {
+            container.style.display = 'none';
+            if (emptyState) emptyState.style.display = 'block';
+            return;
+        }
+        container.style.display = 'block';
+        if (emptyState) emptyState.style.display = 'none';
+        let html = '';
+        for (let item of history) {
+            let scoreClass = item.percentage >= 70 ? 'high' : (item.percentage >= 50 ? 'medium' : 'low');
+            html += `
+                <div class="history-item">
+                    <div class="history-score ${scoreClass}">${item.percentage}%</div>
+                    <div class="history-details">
+                        <div class="history-date">📅 ${item.date}</div>
+                        <div class="history-topic">📚 ${escapeHtml(item.topic)}</div>
+                        <div class="history-stats">✅ ${item.score}/${item.total} correct</div>
+                    </div>
+                    <button class="history-delete-btn" onclick="deleteHistoryItem(${item.id})">🗑️</button>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+    }
+
+    function deleteHistoryItem(id) {
+        let history = getQuizHistory();
+        history = history.filter(item => item.id !== id);
+        localStorage.setItem('anatomyQuizHistory', JSON.stringify(history));
+        displayQuizHistory();
+        const toast = document.createElement('div');
+        toast.textContent = '🗑️ Entry deleted';
+        toast.style.position = 'fixed';
+        toast.style.bottom = '20px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.background = 'var(--primary)';
+        toast.style.color = 'white';
+        toast.style.padding = '10px 20px';
+        toast.style.borderRadius = '30px';
+        toast.style.zIndex = '2000';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 1500);
+    }
+
+    function clearAllHistory() {
+        if (confirm('⚠️ Are you sure you want to delete ALL quiz history? This cannot be undone.')) {
+            localStorage.removeItem('anatomyQuizHistory');
+            displayQuizHistory();
+            const toast = document.createElement('div');
+            toast.textContent = '🗑️ All history cleared';
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.background = 'var(--error)';
+            toast.style.color = 'white';
+            toast.style.padding = '10px 20px';
+            toast.style.borderRadius = '30px';
+            toast.style.zIndex = '2000';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 1500);
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+        loadProgress();
+        displayQuizHistory();
+    });
+</script>
+</body>
+</html>
